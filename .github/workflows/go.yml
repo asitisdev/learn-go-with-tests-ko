@@ -12,6 +12,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
 
@@ -29,31 +31,10 @@ jobs:
     - name: Build Korean books
       run: ./build.books.ko.sh
 
-    - name: Get release
-      id: get_release
+    - name: Upload Korean books to release
       if: github.event_name == 'release' && github.event.action == 'published'
-      uses: bruceadams/get-release@v1.3.2
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Attach Korean epub upon release publish
-      if: github.event_name == 'release' && github.event.action == 'published'
-      uses: actions/upload-release-asset@v1.0.2
+      uses: softprops/action-gh-release@v2
       with:
-        upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./learn-go-with-tests-ko.epub
-        asset_name: learn-go-with-tests-ko.epub
-        asset_content_type: application/epub+zip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Attach Korean PDF upon release publish
-      if: github.event_name == 'release' && github.event.action == 'published'
-      uses: actions/upload-release-asset@v1.0.2
-      with:
-        upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./learn-go-with-tests-ko.pdf
-        asset_name: learn-go-with-tests-ko.pdf
-        asset_content_type: application/pdf
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+        files: |
+          ./learn-go-with-tests-ko.epub
+          ./learn-go-with-tests-ko.pdf
