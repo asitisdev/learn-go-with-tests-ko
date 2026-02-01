@@ -1,0 +1,89 @@
+# 테스트와 함께 Go 배우기
+
+![](../.gitbook/assets/red-green-blue-gophers-smaller.png)
+
+[Denise의 아트워크](https://twitter.com/deniseyu21)
+
+## 후원하기
+
+이 자료를 무료로 제공하게 되어 자랑스럽습니다. 하지만 감사의 표시를 하고 싶으시다면
+
+* [트위터 @quii](https://twitter.com/quii)
+* [마스토돈](https://mastodon.cloud/@quii)
+* [커피 한 잔 사주기](https://www.buymeacoffee.com/quii)
+* [GitHub 스폰서로 후원하기](https://github.com/sponsors/quii)
+
+## Go로 테스트 주도 개발 배우기
+
+* 테스트를 작성하면서 Go 언어를 탐험하세요
+* **TDD의 기초를 다지세요**. Go는 배우기 쉬운 언어이고 테스트가 내장되어 있어서 TDD를 배우기에 좋은 언어입니다
+* Go로 견고하고 잘 테스트된 시스템을 작성할 수 있다는 자신감을 얻으세요
+
+번역본:
+
+* [중국어](https://studygolang.gitbook.io/learn-go-with-tests)
+* [포르투갈어](https://larien.gitbook.io/aprenda-go-com-testes/)
+* [일본어](https://andmorefine.gitbook.io/learn-go-with-tests/)
+* [프랑스어](https://goosegeesejeez.gitbook.io/apprendre-go-par-les-tests)
+* [한국어](https://miryang.gitbook.io/learn-go-with-tests/)
+* [터키어](https://halilkocaoz.gitbook.io/go-programlama-dilini-ogren/)
+* [네덜란드어](https://bobkosse.gitbook.io/leer-go-met-tests)
+
+## 배경
+
+저는 개발 팀에 Go를 소개한 경험이 있으며, Go에 호기심을 가진 몇몇 사람들로 구성된 팀을 Go 시스템을 매우 효과적으로 작성하는 팀으로 성장시키기 위해 다양한 접근 방식을 시도해 보았습니다.
+
+### 효과가 없었던 것
+
+#### 책 읽기
+
+우리가 시도한 접근 방식 중 하나는 [파란 책](https://www.amazon.co.uk/Programming-Language-Addison-Wesley-Professional-Computing/dp/0134190440)을 가져와서 매주 다음 장과 연습 문제를 논의하는 것이었습니다.
+
+저는 이 책을 좋아하지만, 높은 수준의 헌신이 필요합니다. 이 책은 개념을 매우 자세히 설명하는데, 이는 분명히 훌륭하지만 진행이 느리고 꾸준하다는 것을 의미합니다 - 이것은 모든 사람에게 맞지 않습니다.
+
+소수의 사람들은 X장을 읽고 연습 문제를 풀지만, 많은 사람들은 그러지 않았습니다.
+
+#### 문제 풀기
+
+카타(Kata)는 재미있지만 언어를 배우는 데 있어 범위가 제한적입니다; 카타를 풀기 위해 고루틴을 사용할 가능성은 낮습니다.
+
+또 다른 문제는 열정의 수준이 다양하다는 것입니다. 어떤 사람들은 다른 사람들보다 언어를 훨씬 더 많이 배우고, 자신이 한 것을 시연할 때 다른 사람들이 익숙하지 않은 기능으로 혼란을 주게 됩니다.
+
+이것은 학습이 상당히 _비구조적_이고 _임시적_으로 느껴지게 합니다.
+
+### 효과가 있었던 것
+
+가장 효과적인 방법은 [Go by Example](https://gobyexample.com/)을 읽으면서 언어의 기초를 천천히 소개하고, 예제를 통해 탐험하고, 그룹으로 토론하는 것이었습니다. 이것은 "다음 주까지 x장을 읽어오세요"보다 더 상호작용적인 접근 방식이었습니다.
+
+시간이 지나면서 팀은 언어의 _문법_에 대한 탄탄한 기초를 얻었고, 그런 다음 시스템을 구축하기 시작할 수 있었습니다.
+
+이것은 기타를 배울 때 스케일을 연습하는 것과 유사해 보입니다.
+
+얼마나 예술적이라고 생각하든, 기초를 이해하고 메커니즘을 연습하지 않으면 좋은 음악을 작곡할 가능성은 낮습니다.
+
+### 저에게 효과적인 것
+
+_저_는 새로운 프로그래밍 언어를 배울 때 보통 REPL에서 이것저것 해보는 것으로 시작하지만, 결국에는 더 많은 구조가 필요합니다.
+
+저는 개념을 탐구한 다음 테스트로 아이디어를 확고히 하는 것을 좋아합니다. 테스트는 제가 작성한 코드가 올바른지 검증하고 제가 배운 기능을 문서화합니다.
+
+그룹과 함께 배운 경험과 개인적인 방식을 바탕으로, 다른 팀에게도 유용할 만한 것을 만들어 보려고 합니다. 작은 테스트를 작성하면서 기초를 배우고, 그런 다음 기존의 소프트웨어 설계 기술을 활용하여 훌륭한 시스템을 배포할 수 있도록 말입니다.
+
+## 이 책의 대상
+
+* Go를 배우는 데 관심이 있는 사람들
+* 이미 Go를 어느 정도 알지만 테스트에 대해 더 탐구하고 싶은 사람들
+
+## 필요한 것
+
+* 컴퓨터!
+* [설치된 Go](https://golang.org/)
+* 텍스트 에디터
+* 프로그래밍 경험. `if`, 변수, 함수 등의 개념에 대한 이해.
+* 터미널 사용에 익숙함
+
+## 피드백
+
+* [여기](https://github.com/quii/learn-go-with-tests)에서 이슈를 추가하거나 PR을 제출하세요. 또는 [트위터 @quii](https://twitter.com/quii)로 연락하세요
+
+[MIT 라이선스](../LICENSE.md)
