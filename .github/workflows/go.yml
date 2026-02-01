@@ -20,11 +20,14 @@ jobs:
       with:
         go-version: 1.24
 
-    - name: Build
-      run: ./build.sh
+    - name: Build and Test Go code
+      run: |
+        go test ./...
+        go vet ./...
+        go fmt ./...
 
-    - name: Build books
-      run: ./build.books.sh
+    - name: Build Korean books
+      run: ./build.books.ko.sh
 
     - name: Get release
       id: get_release
@@ -33,25 +36,24 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach generated epub upon release publish
+    - name: Attach Korean epub upon release publish
       if: github.event_name == 'release' && github.event.action == 'published'
+      uses: actions/upload-release-asset@v1.0.2
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./learn-go-with-tests.epub
-        asset_name: learn-go-with-tests.epub
+        asset_path: ./learn-go-with-tests-ko.epub
+        asset_name: learn-go-with-tests-ko.epub
         asset_content_type: application/epub+zip
-      uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach generated PDF upon release publish
+    - name: Attach Korean PDF upon release publish
       if: github.event_name == 'release' && github.event.action == 'published'
+      uses: actions/upload-release-asset@v1.0.2
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./learn-go-with-tests.pdf
-        asset_name: learn-go-with-tests.pdf
+        asset_path: ./learn-go-with-tests-ko.pdf
+        asset_name: learn-go-with-tests-ko.pdf
         asset_content_type: application/pdf
-      uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ github.token }}
-

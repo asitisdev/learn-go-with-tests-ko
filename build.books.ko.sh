@@ -16,8 +16,7 @@ fi
 
 # PDF 빌드 (CJK 한글 지원 Docker 이미지 사용)
 # uppalabharath/pandoc-latex-cjk 이미지는 한글 폰트를 포함하고 있음
-# --platform linux/amd64: M1/M2 Mac (ARM) 호환성을 위해 필요
-docker run --rm --platform linux/amd64 -v `pwd`:/data uppalabharath/pandoc-latex-cjk:latest --from=gfm+rebase_relative_paths -o learn-go-with-tests-ko.pdf \
+docker run --rm -v `pwd`:/data uppalabharath/pandoc-latex-cjk:latest --from=gfm+rebase_relative_paths -o learn-go-with-tests-ko.pdf \
     -H meta.tex --pdf-engine=xelatex --variable urlcolor=blue --toc --toc-depth=1 \
     -V mainfont="Noto Sans CJK KR" \
     -V sansfont="Noto Sans CJK KR" \
@@ -63,8 +62,7 @@ docker run --rm --platform linux/amd64 -v `pwd`:/data uppalabharath/pandoc-latex
     ko-KR/anti-patterns.md
 
 # EPUB 빌드
-# --platform linux/amd64: M1/M2 Mac (ARM) 호환성을 위해 필요
-docker run --rm --platform linux/amd64 -v `pwd`:/data pandoc/latex:latest --from=gfm+rebase_relative_paths --to=epub --file-scope title.txt -o learn-go-with-tests-ko.epub --pdf-engine=xelatex --toc --toc-depth=1 \
+docker run --rm -v `pwd`:/data pandoc/latex:latest --from=gfm+rebase_relative_paths --to=epub --file-scope title.txt -o learn-go-with-tests-ko.epub --pdf-engine=xelatex --toc --toc-depth=1 \
     ko-KR/gb-readme.md \
     ko-KR/why.md \
     ko-KR/hello-world.md \
