@@ -4,6 +4,16 @@
 
 [Denise의 아트워크](https://twitter.com/deniseyu21)
 
+> 🇰🇷 이 문서는 [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests)의 **LLM 기반 한국어 번역**입니다.
+
+## 📖 번역
+
+본 문서의 번역은 번역은 LLM(Claude Opus 4.5)을 활용하여 자동으로 진행되었습니다. 일부 정확하지 않은 번역이나 누락된 부분이 있을 수 있습니다.
+
+- **한국어 저장소**: [asitisdev/learn-go-with-tests-ko](https://github.com/asitisdev/learn-go-with-tests-ko)
+- **원본 저장소**: [quii/learn-go-with-tests](https://github.com/quii/learn-go-with-tests)
+- **원저자**: [Chris James (@quii)](https://twitter.com/quii)
+
 ## 후원하기
 
 이 자료를 무료로 제공하게 되어 자랑스럽습니다. 하지만 감사의 표시를 하고 싶으시다면
@@ -18,16 +28,6 @@
 * 테스트를 작성하면서 Go 언어를 탐험하세요
 * **TDD의 기초를 다지세요**. Go는 배우기 쉬운 언어이고 테스트가 내장되어 있어서 TDD를 배우기에 좋은 언어입니다
 * Go로 견고하고 잘 테스트된 시스템을 작성할 수 있다는 자신감을 얻으세요
-
-번역본:
-
-* [중국어](https://studygolang.gitbook.io/learn-go-with-tests)
-* [포르투갈어](https://larien.gitbook.io/aprenda-go-com-testes/)
-* [일본어](https://andmorefine.gitbook.io/learn-go-with-tests/)
-* [프랑스어](https://goosegeesejeez.gitbook.io/apprendre-go-par-les-tests)
-* [한국어](https://miryang.gitbook.io/learn-go-with-tests/)
-* [터키어](https://halilkocaoz.gitbook.io/go-programlama-dilini-ogren/)
-* [네덜란드어](https://bobkosse.gitbook.io/leer-go-met-tests)
 
 ## 배경
 
@@ -85,5 +85,6 @@
 ## 피드백
 
 * [여기](https://github.com/quii/learn-go-with-tests)에서 이슈를 추가하거나 PR을 제출하세요. 또는 [트위터 @quii](https://twitter.com/quii)로 연락하세요
+* 번역에 대한 피드백은 [여기](https://github.com/asitisdev/learn-go-with-tests-ko)에서 이슈를 추가하거나 PR을 제출하세요.
 
 [MIT 라이선스](../LICENSE.md)
