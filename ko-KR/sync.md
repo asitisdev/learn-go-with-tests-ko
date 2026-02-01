@@ -65,9 +65,9 @@ func (c *Counter) Value() int {
 
 ```
 === RUN   TestCounter
-=== RUN   TestCounter/incrementing_the_counter_3_times_leaves_it_at_3
+=== RUN   TestCounter/incrementing*the*counter*3*times*leaves*it*at*3
 --- FAIL: TestCounter (0.00s)
-    --- FAIL: TestCounter/incrementing_the_counter_3_times_leaves_it_at_3 (0.00s)
+    --- FAIL: TestCounter/incrementing*the*counter*3*times*leaves*it*at*3 (0.00s)
     	sync_test.go:27: got 0, want 3
 ```
 
@@ -149,14 +149,14 @@ t.Run("it runs safely concurrently", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestCounter/it_runs_safely_in_a_concurrent_envionment
+=== RUN   TestCounter/it*runs*safely*in*a*concurrent*envionment
 --- FAIL: TestCounter (0.00s)
-    --- FAIL: TestCounter/it_runs_safely_in_a_concurrent_envionment (0.00s)
+    --- FAIL: TestCounter/it*runs*safely*in*a*concurrent*envionment (0.00s)
     	sync_test.go:26: got 939, want 1000
 FAIL
 ```
 
-테스트는 _아마도_ 다른 숫자로 실패하지만, 그럼에도 불구하고 여러 고루틴이 동시에 카운터 값을 변경하려고 할 때 작동하지 않는다는 것을 보여줍니다.
+테스트는 *아마도* 다른 숫자로 실패하지만, 그럼에도 불구하고 여러 고루틴이 동시에 카운터 값을 변경하려고 할 때 작동하지 않는다는 것을 보여줍니다.
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
 
@@ -202,15 +202,15 @@ func (c *Counter) Inc() {
 }
 ```
 
-이것은 _좋아 보이지만_ 프로그래밍이 매우 주관적인 분야이지만 이것은 **나쁘고 잘못되었습니다**.
+이것은 *좋아 보이지만* 프로그래밍이 매우 주관적인 분야이지만 이것은 **나쁘고 잘못되었습니다**.
 
-때때로 사람들은 타입을 임베딩하면 해당 타입의 메서드가 _공개 인터페이스의 일부_가 된다는 것을 잊습니다; 그리고 종종 그것을 원하지 않을 것입니다. 우리는 공개 API에 매우 주의해야 합니다. 무언가를 공개하는 순간은 다른 코드가 그것에 결합할 수 있는 순간입니다. 우리는 항상 불필요한 결합을 피하고 싶습니다.
+때때로 사람들은 타입을 임베딩하면 해당 타입의 메서드가 *공개 인터페이스의 일부*가 된다는 것을 잊습니다; 그리고 종종 그것을 원하지 않을 것입니다. 우리는 공개 API에 매우 주의해야 합니다. 무언가를 공개하는 순간은 다른 코드가 그것에 결합할 수 있는 순간입니다. 우리는 항상 불필요한 결합을 피하고 싶습니다.
 
 `Lock`과 `Unlock`을 노출하는 것은 기껏해야 혼란스럽지만 최악의 경우 타입의 호출자가 이러한 메서드를 호출하기 시작하면 소프트웨어에 잠재적으로 매우 해로울 수 있습니다.
 
 ![이 API의 사용자가 잠금 상태를 잘못 변경할 수 있는 방법 보여주기](https://i.imgur.com/SWYNpwm.png)
 
-_이것은 정말 나쁜 생각 같습니다_
+*이것은 정말 나쁜 생각 같습니다*
 
 ## 뮤텍스 복사
 
@@ -271,5 +271,5 @@ func NewCounter() *Counter {
 ### 편리하다고 임베딩을 사용하지 마세요
 
 - 임베딩이 공개 API에 미치는 영향에 대해 생각하세요.
-- _정말로_ 이러한 메서드를 노출하고 사람들이 자신의 코드를 그것에 결합하게 하고 싶으신가요?
+- *정말로* 이러한 메서드를 노출하고 사람들이 자신의 코드를 그것에 결합하게 하고 싶으신가요?
 - 뮤텍스와 관련하여 이것은 매우 예측할 수 없고 이상한 방식으로 잠재적으로 치명적일 수 있습니다. 일부 악의적인 코드가 해서는 안 될 때 뮤텍스를 잠금 해제한다고 상상해 보세요; 이것은 추적하기 어려운 매우 이상한 버그를 일으킬 것입니다.

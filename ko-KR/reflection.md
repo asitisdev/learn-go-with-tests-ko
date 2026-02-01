@@ -6,7 +6,7 @@
 
 > golang 챌린지: 구조체 `x`를 받아서 내부에서 발견된 모든 문자열 필드에 대해 `fn`을 호출하는 함수 `walk(x interface{}, fn func(string))`을 작성하세요. 난이도: 재귀적으로.
 
-이를 위해 _리플렉션_을 사용해야 합니다.
+이를 위해 *리플렉션*을 사용해야 합니다.
 
 > 컴퓨팅에서 리플렉션은 프로그램이 특히 타입을 통해 자신의 구조를 검사하는 능력입니다; 메타프로그래밍의 한 형태입니다. 또한 혼란의 큰 원천이기도 합니다.
 
@@ -20,14 +20,14 @@
 
 하지만 컴파일 시간에 타입을 모르는 함수를 작성하고 싶은 시나리오에 직면할 수 있습니다.
 
-Go에서는 `interface{}` 타입으로 이것을 해결할 수 있으며, _모든_ 타입으로 생각할 수 있습니다 (실제로 Go에서 `any`는 `interface{}`의 [별칭](https://cs.opensource.google/go/go/+/master:src/builtin/builtin.go;drc=master;l=95)입니다).
+Go에서는 `interface{}` 타입으로 이것을 해결할 수 있으며, *모든* 타입으로 생각할 수 있습니다 (실제로 Go에서 `any`는 `interface{}`의 [별칭](https://cs.opensource.google/go/go/+/master:src/builtin/builtin.go;drc=master;l=95)입니다).
 
 따라서 `walk(x interface{}, fn func(string))`은 `x`에 대해 어떤 값이든 받아들입니다.
 
 ### 그러면 왜 모든 것에 `interface{}`를 사용하고 정말 유연한 함수를 갖지 않나요?
 
-- `interface{}`를 받는 함수의 사용자로서 타입 안전성을 잃습니다. `int`인 `Herd.count` 대신 `string` 타입인 `Herd.species`를 함수에 전달하려고 했다면 어떨까요? 컴파일러가 실수를 알려줄 수 없습니다. 또한 함수에 _무엇_을 전달할 수 있는지 전혀 알 수 없습니다. 예를 들어 함수가 `UserService`를 받는다는 것을 아는 것은 매우 유용합니다.
-- 그러한 함수의 작성자로서, 전달된 _모든 것_을 검사하고 타입이 무엇이고 무엇을 할 수 있는지 알아내야 합니다. 이것은 _리플렉션_을 사용하여 수행됩니다. 이것은 상당히 어색하고 읽기 어려울 수 있으며 일반적으로 성능이 떨어집니다 (런타임에 검사를 해야 하기 때문에).
+- `interface{}`를 받는 함수의 사용자로서 타입 안전성을 잃습니다. `int`인 `Herd.count` 대신 `string` 타입인 `Herd.species`를 함수에 전달하려고 했다면 어떨까요? 컴파일러가 실수를 알려줄 수 없습니다. 또한 함수에 *무엇*을 전달할 수 있는지 전혀 알 수 없습니다. 예를 들어 함수가 `UserService`를 받는다는 것을 아는 것은 매우 유용합니다.
+- 그러한 함수의 작성자로서, 전달된 *모든 것*을 검사하고 타입이 무엇이고 무엇을 할 수 있는지 알아내야 합니다. 이것은 *리플렉션*을 사용하여 수행됩니다. 이것은 상당히 어색하고 읽기 어려울 수 있으며 일반적으로 성능이 떨어집니다 (런타임에 검사를 해야 하기 때문에).
 
 간단히 말해서 정말 필요한 경우에만 리플렉션을 사용하세요.
 
@@ -129,7 +129,7 @@ func walk(x interface{}, fn func(input string)) {
 }
 ```
 
-이 코드는 _매우 안전하지 않고 매우 순진합니다_. 하지만 기억하세요: "빨간색" (테스트 실패) 상태에서 목표는 가능한 가장 적은 양의 코드를 작성하는 것입니다. 그런 다음 우리의 우려를 해결하기 위해 더 많은 테스트를 작성합니다.
+이 코드는 *매우 안전하지 않고 매우 순진합니다*. 하지만 기억하세요: "빨간색" (테스트 실패) 상태에서 목표는 가능한 가장 적은 양의 코드를 작성하는 것입니다. 그런 다음 우리의 우려를 해결하기 위해 더 많은 테스트를 작성합니다.
 
 `x`를 살펴보고 속성을 보려면 리플렉션을 사용해야 합니다.
 
@@ -200,8 +200,8 @@ func TestWalk(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/struct_with_two_string_fields
-    --- FAIL: TestWalk/struct_with_two_string_fields (0.00s)
+=== RUN   TestWalk/struct*with*two*string*fields
+    --- FAIL: TestWalk/struct*with*two*string*fields (0.00s)
         reflection_test.go:40: got [Chris], want [Chris London]
 ```
 
@@ -244,8 +244,8 @@ func walk(x interface{}, fn func(input string)) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/struct_with_non_string_field
-    --- FAIL: TestWalk/struct_with_non_string_field (0.00s)
+=== RUN   TestWalk/struct*with*non*string*field
+    --- FAIL: TestWalk/struct*with*non*string*field (0.00s)
         reflection_test.go:46: got [Chris <int Value>], want [Chris]
 ```
 
@@ -378,7 +378,7 @@ func walk(x interface{}, fn func(input string)) {
 }
 ```
 
-동일한 값에 대해 두 번 이상 비교를 수행하는 경우 _일반적으로_ `switch`로 리팩토링하면 가독성이 향상되고 코드를 확장하기 쉬워집니다.
+동일한 값에 대해 두 번 이상 비교를 수행하는 경우 *일반적으로* `switch`로 리팩토링하면 가독성이 향상되고 코드를 확장하기 쉬워집니다.
 
 전달된 구조체의 값이 포인터라면 어떨까요?
 
@@ -400,7 +400,7 @@ func walk(x interface{}, fn func(input string)) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/pointers_to_things
+=== RUN   TestWalk/pointers*to*things
 panic: reflect: call of reflect.Value.NumField on ptr Value [recovered]
     panic: reflect: call of reflect.Value.NumField on ptr Value
 ```
@@ -461,7 +461,7 @@ func getValue(x interface{}) reflect.Value {
 }
 ```
 
-이것은 실제로 _더 많은_ 코드를 추가하지만 추상화 수준이 올바르다고 느낍니다.
+이것은 실제로 *더 많은* 코드를 추가하지만 추상화 수준이 올바르다고 느낍니다.
 
 - `x`의 `reflect.Value`를 가져와서 검사할 수 있습니다. 어떻게 하는지는 신경 쓰지 않습니다.
 - 필드를 반복하면서 타입에 따라 필요한 작업을 수행합니다.
@@ -526,11 +526,11 @@ func walk(x interface{}, fn func(input string)) {
 조금 추상적으로 생각하면 다음 중 하나에서 `walk`를 호출하고 싶습니다
 
 - 구조체의 각 필드
-- 슬라이스의 각 _것_
+- 슬라이스의 각 *것*
 
 현재 코드가 이것을 수행하지만 잘 반영하지 않습니다. 시작 부분에 슬라이스인지 확인하고 (나머지 코드 실행을 중지하기 위한 `return`과 함께) 그렇지 않으면 구조체라고 가정합니다.
 
-_먼저_ 타입을 확인한 다음 작업을 수행하도록 코드를 다시 작성합시다.
+*먼저* 타입을 확인한 다음 작업을 수행하도록 코드를 다시 작성합시다.
 
 ```go
 func walk(x interface{}, fn func(input string)) {
@@ -696,13 +696,13 @@ func walk(x interface{}, fn func(input string)) {
 }
 ```
 
-그러나 설계상 인덱스로 맵에서 값을 가져올 수 없습니다. _키_로만 수행되므로 추상화가 깨집니다, 젠장.
+그러나 설계상 인덱스로 맵에서 값을 가져올 수 없습니다. *키*로만 수행되므로 추상화가 깨집니다, 젠장.
 
 ## 리팩토링
 
 지금 기분이 어떠세요? 당시에는 좋은 추상화처럼 느껴졌지만 이제 코드가 약간 이상해 보입니다.
 
-_괜찮아요!_ 리팩토링은 여정이고 때때로 실수를 합니다. TDD의 주요 포인트는 이러한 것들을 시도할 자유를 준다는 것입니다.
+*괜찮아요!* 리팩토링은 여정이고 때때로 실수를 합니다. TDD의 주요 포인트는 이러한 것들을 시도할 자유를 준다는 것입니다.
 
 테스트로 뒷받침되는 작은 단계를 밟으면 이것은 결코 되돌릴 수 없는 상황이 아닙니다. 리팩토링 전의 원래대로 되돌립시다.
 

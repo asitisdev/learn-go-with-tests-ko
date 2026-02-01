@@ -2,7 +2,7 @@
 
 **[이 챕터의 모든 코드는 여기에서 찾을 수 있습니다](https://github.com/quii/learn-go-with-tests/tree/main/command-line)**
 
-제품 소유자는 이제 두 번째 애플리케이션 - 커맨드 라인 애플리케이션을 도입하여 _피벗_하기를 원합니다.
+제품 소유자는 이제 두 번째 애플리케이션 - 커맨드 라인 애플리케이션을 도입하여 *피벗*하기를 원합니다.
 
 지금은 사용자가 `Ruth wins`를 입력할 때 플레이어의 승리를 기록할 수 있으면 됩니다. 궁극적으로는 사용자가 포커를 플레이하는 것을 돕는 도구가 될 것입니다.
 
@@ -36,7 +36,7 @@ Go에서 애플리케이션을 만들려면 `package main` 안에 `main` 함수�
 
 지금까지는 괜찮았고 패키지 구조를 과도하게 만들지 않는 것이 좋은 관행입니다. 표준 라이브러리를 살펴보면 많은 폴더와 구조를 거의 볼 수 없습니다.
 
-다행히 _필요할 때_ 구조를 추가하는 것은 꽤 간단합니다.
+다행히 *필요할 때* 구조를 추가하는 것은 꽤 간단합니다.
 
 기존 프로젝트 안에 `cmd` 디렉토리를 만들고 그 안에 `webserver` 디렉토리를 만듭니다(예: `mkdir -p cmd/webserver`).
 
@@ -46,20 +46,20 @@ Go에서 애플리케이션을 만들려면 `package main` 안에 `main` 함수�
 
 ```
 .
-|-- file_system_store.go
-|-- file_system_store_test.go
+|-- file*system*store.go
+|-- file*system*store_test.go
 |-- cmd
 |   |-- webserver
 |       |-- main.go
 |-- league.go
 |-- server.go
-|-- server_integration_test.go
+|-- server*integration*test.go
 |-- server_test.go
 |-- tape.go
 |-- tape_test.go
 ```
 
-이제 효과적으로 애플리케이션과 라이브러리 코드 사이에 분리가 있지만 이제 일부 패키지 이름을 변경해야 합니다. Go 애플리케이션을 빌드할 때 패키지는 _반드시_ `main`이어야 합니다.
+이제 효과적으로 애플리케이션과 라이브러리 코드 사이에 분리가 있지만 이제 일부 패키지 이름을 변경해야 합니다. Go 애플리케이션을 빌드할 때 패키지는 *반드시* `main`이어야 합니다.
 
 다른 모든 코드를 `poker`라는 패키지를 갖도록 변경합니다.
 
@@ -81,7 +81,7 @@ import (
 const dbFileName = "game.db.json"
 
 func main() {
-	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -99,7 +99,7 @@ func main() {
 }
 ```
 
-전체 경로가 약간 어색하게 보일 수 있지만 이것이 _모든_ 공개적으로 사용 가능한 라이브러리를 코드로 가져오는 방법입니다.
+전체 경로가 약간 어색하게 보일 수 있지만 이것이 *모든* 공개적으로 사용 가능한 라이브러리를 코드로 가져오는 방법입니다.
 
 도메인 코드를 별도의 패키지로 분리하고 GitHub과 같은 공개 저장소에 커밋하면 모든 Go 개발자가 해당 패키지를 가져오는 자체 코드를 작성하여 우리가 작성한 기능을 사용할 수 있습니다. 처음 실행하면 존재하지 않는다고 불평하지만 `go get`을 실행하기만 하면 됩니다.
 
@@ -286,7 +286,7 @@ func assertPlayerWin(t testing.TB, store *StubPlayerStore, winner string) {
 }
 ```
 
-이제 `server_test.go`와 `CLI_test.go` 모두에서 어설션을 교체합니다.
+이제 `server*test.go`와 `CLI*test.go` 모두에서 어설션을 교체합니다.
 
 테스트는 이제 다음과 같이 읽혀야 합니다
 
@@ -303,7 +303,7 @@ func TestCLI(t *testing.T) {
 }
 ```
 
-이제 실제로 읽도록 강제하기 위해 다른 사용자 입력으로 _다른_ 테스트를 작성합시다.
+이제 실제로 읽도록 강제하기 위해 다른 사용자 입력으로 *다른* 테스트를 작성합시다.
 
 ## 먼저 테스트 작성
 
@@ -339,10 +339,10 @@ func TestCLI(t *testing.T) {
 ```
 === RUN   TestCLI
 --- FAIL: TestCLI (0.00s)
-=== RUN   TestCLI/record_chris_win_from_user_input
-    --- PASS: TestCLI/record_chris_win_from_user_input (0.00s)
-=== RUN   TestCLI/record_cleo_win_from_user_input
-    --- FAIL: TestCLI/record_cleo_win_from_user_input (0.00s)
+=== RUN   TestCLI/record*chris*win*from*user_input
+    --- PASS: TestCLI/record*chris*win*from*user_input (0.00s)
+=== RUN   TestCLI/record*cleo*win*from*user_input
+    --- FAIL: TestCLI/record*cleo*win*from*user_input (0.00s)
         CLI_test.go:27: did not store correct winner got 'Chris' want 'Cleo'
 FAIL
 ```
@@ -398,7 +398,7 @@ func main() {
 	fmt.Println("Let's play poker")
 	fmt.Println("Type {Name} wins to record a win")
 
-	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -422,9 +422,9 @@ command-line/v3/cmd/cli/main.go:32:25: implicit assignment of unexported field '
 command-line/v3/cmd/cli/main.go:32:34: implicit assignment of unexported field 'in' in poker.CLI literal
 ```
 
-여기서 일어나는 것은 `CLI`의 필드 `playerStore`와 `in`에 할당하려고 하기 때문입니다. 이것은 내보내지지 않은(private) 필드입니다. 테스트 코드는 `CLI`와 같은 패키지(`poker`)에 있기 때문에 할 수 _있습니다_. 하지만 `main`은 패키지 `main`에 있으므로 접근 권한이 없습니다.
+여기서 일어나는 것은 `CLI`의 필드 `playerStore`와 `in`에 할당하려고 하기 때문입니다. 이것은 내보내지지 않은(private) 필드입니다. 테스트 코드는 `CLI`와 같은 패키지(`poker`)에 있기 때문에 할 수 *있습니다*. 하지만 `main`은 패키지 `main`에 있으므로 접근 권한이 없습니다.
 
-이것은 _작업 통합_의 중요성을 강조합니다. `CLI`의 종속성을 올바르게 private으로 만들었지만(`CLI` 사용자에게 노출하고 싶지 않기 때문에) 사용자가 구성할 방법을 만들지 않았습니다.
+이것은 *작업 통합*의 중요성을 강조합니다. `CLI`의 종속성을 올바르게 private으로 만들었지만(`CLI` 사용자에게 노출하고 싶지 않기 때문에) 사용자가 구성할 방법을 만들지 않았습니다.
 
 이 문제를 더 일찍 잡을 수 있는 방법이 있을까요?
 
@@ -434,13 +434,13 @@ command-line/v3/cmd/cli/main.go:32:34: implicit assignment of unexported field '
 
 이것은 괜찮고 패키지 내부의 무언가를 테스트하고 싶은 경우에 내보내지지 않은 타입에 접근할 수 있다는 것을 의미합니다.
 
-하지만 _일반적으로_ 내부 것을 테스트하지 않는 것을 옹호했다면, Go가 그것을 강제하는 데 도움이 될 수 있을까요? 내보낸 타입에만 접근할 수 있는 코드를 테스트할 수 있다면요(`main`처럼)?
+하지만 *일반적으로* 내부 것을 테스트하지 않는 것을 옹호했다면, Go가 그것을 강제하는 데 도움이 될 수 있을까요? 내보낸 타입에만 접근할 수 있는 코드를 테스트할 수 있다면요(`main`처럼)?
 
 여러 패키지가 있는 프로젝트를 작성할 때 테스트 패키지 이름 끝에 `_test`가 있는 것을 강력히 권장합니다. 이렇게 하면 패키지의 공개 타입에만 접근할 수 있습니다. 이것은 이 특정 경우에 도움이 되지만 공개 API만 테스트하는 규율을 강제하는 데도 도움이 됩니다. 여전히 내부를 테스트하려면 테스트하려는 패키지로 별도의 테스트를 만들 수 있습니다.
 
 TDD의 격언은 코드를 테스트할 수 없으면 코드 사용자가 통합하기 어려울 것이라는 것입니다. `package foo_test`를 사용하면 패키지 사용자가 가져오는 것처럼 코드를 테스트하도록 강제하여 도움이 됩니다.
 
-`main` 수정 전에 `CLI_test.go` 안의 테스트 패키지를 `poker_test`로 변경합시다.
+`main` 수정 전에 `CLI*test.go` 안의 테스트 패키지를 `poker*test`로 변경합시다.
 
 잘 구성된 IDE가 있으면 갑자기 많은 빨간색이 표시될 것입니다! 컴파일러를 실행하면 다음 에러가 발생합니다
 
@@ -451,7 +451,7 @@ TDD의 격언은 코드를 테스트할 수 없으면 코드 사용자가 통합
 ./CLI_test.go:27:3: undefined: assertPlayerWin
 ```
 
-이제 패키지 설계에 대한 더 많은 질문에 부딪혔습니다. 소프트웨어를 테스트하기 위해 내보내지지 않은 스텁과 헬퍼 함수를 만들었는데 헬퍼가 `poker` 패키지의 `_test.go` 파일에 정의되어 있기 때문에 더 이상 `CLI_test`에서 사용할 수 없습니다.
+이제 패키지 설계에 대한 더 많은 질문에 부딪혔습니다. 소프트웨어를 테스트하기 위해 내보내지지 않은 스텁과 헬퍼 함수를 만들었는데 헬퍼가 `poker` 패키지의 `*test.go` 파일에 정의되어 있기 때문에 더 이상 `CLI*test`에서 사용할 수 없습니다.
 
 #### 스텁과 헬퍼를 '공개'하기를 원하나요?
 
@@ -592,12 +592,12 @@ game := poker.NewCLI(store, os.Stdin)
 
 ### 리팩토링
 
-파일을 열고 그 내용에서 `file_system_store`를 만드는 각 애플리케이션에서 반복이 있습니다. 이것은 패키지 설계의 약간의 약점처럼 느껴지므로 경로에서 파일을 열고 `PlayerStore`를 반환하는 기능을 캡슐화하도록 만들어야 합니다.
+파일을 열고 그 내용에서 `file*system*store`를 만드는 각 애플리케이션에서 반복이 있습니다. 이것은 패키지 설계의 약간의 약점처럼 느껴지므로 경로에서 파일을 열고 `PlayerStore`를 반환하는 기능을 캡슐화하도록 만들어야 합니다.
 
 ```go
-//file_system_store.go
+//file*system*store.go
 func FileSystemPlayerStoreFromFile(path string) (*FileSystemPlayerStore, func(), error) {
-	db, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0666)
+	db, err := os.OpenFile(path, os.O*RDWR|os.O*CREATE, 0666)
 
 	if err != nil {
 		return nil, nil, fmt.Errorf("problem opening %s %v", path, err)

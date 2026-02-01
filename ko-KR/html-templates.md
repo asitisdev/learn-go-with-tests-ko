@@ -2,7 +2,7 @@
 
 **[이 챕터의 모든 코드는 여기에서 확인할 수 있습니다](https://github.com/quii/learn-go-with-tests/tree/main/blogrenderer)**
 
-우리는 모든 사람이 기가바이트의 트랜스파일된 JavaScript 위에 구축된 이달의 최신 프론트엔드 프레임워크로 웹 애플리케이션을 구축하고 싶어하는 세상에 살고 있습니다. 비잔틴식 빌드 시스템으로 작업하지만; [그것이 항상 필요한 것은 아닐 수 있습니다](https://quii.dev/The_Web_I_Want).
+우리는 모든 사람이 기가바이트의 트랜스파일된 JavaScript 위에 구축된 이달의 최신 프론트엔드 프레임워크로 웹 애플리케이션을 구축하고 싶어하는 세상에 살고 있습니다. 비잔틴식 빌드 시스템으로 작업하지만; [그것이 항상 필요한 것은 아닐 수 있습니다](https://quii.dev/The*Web*I_Want).
 
 대부분의 Go 개발자는 간단하고 안정적이며 빠른 도구 체인을 중요시하지만 프론트엔드 세계는 종종 이 측면에서 실패합니다.
 
@@ -182,11 +182,11 @@ Tags: <ul><li>go</li><li>tdd</li></ul>`
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
 
-코드를 복사하는 대신 직접 시도해 보세요. 이 테스트를 통과시키는 것이 _조금 짜증난다_는 것을 알게 될 것입니다! 처음 시도했을 때 이 오류가 발생했습니다
+코드를 복사하는 대신 직접 시도해 보세요. 이 테스트를 통과시키는 것이 *조금 짜증난다*는 것을 알게 될 것입니다! 처음 시도했을 때 이 오류가 발생했습니다
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it_converts_a_single_post_into_HTML
+=== RUN   TestRender/it*converts*a*single*post*into*HTML
     renderer_test.go:32: got '<h1>hello world</h1><p>This is a description</p><ul><li>go</li><li>tdd</li></ul>' want '<h1>hello world</h1>
         <p>This is a description</p>
         Tags: <ul><li>go</li><li></li></ul>'
@@ -397,14 +397,14 @@ func TestRender(t *testing.T) {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it_converts_a_single_post_into_HTML
+=== RUN   TestRender/it*converts*a*single*post*into*HTML
     renderer_test.go:29: Failed Approval: received does not match approved.
 ```
 
 두 개의 파일이 생성됩니다
 
-- `renderer_test.TestRender.it_converts_a_single_post_into_HTML.received.txt`
-- `renderer_test.TestRender.it_converts_a_single_post_into_HTML.approved.txt`
+- `renderer*test.TestRender.it*converts*a*single*post*into_HTML.received.txt`
+- `renderer*test.TestRender.it*converts*a*single*post*into_HTML.approved.txt`
 
 received 파일에는 새로운 승인되지 않은 버전의 출력이 있습니다. 그것을 빈 approved 파일에 복사하고 테스트를 다시 실행합니다.
 
@@ -432,7 +432,7 @@ Tags: <ul>{{range .Tags}}<li>{{.}}</li>{{end}}</ul>
 
 ### 우리는 여전히 TDD를 하고 있나요?
 
-이 접근 방식의 흥미로운 부작용은 TDD에서 멀어지게 한다는 것입니다. 물론 원하는 상태로 승인된 파일을 수동으로 편집하고 테스트를 실행한 다음 정의한 내용을 출력하도록 템플릿을 수정할 수 _있습니다_.
+이 접근 방식의 흥미로운 부작용은 TDD에서 멀어지게 한다는 것입니다. 물론 원하는 상태로 승인된 파일을 수동으로 편집하고 테스트를 실행한 다음 정의한 내용을 출력하도록 템플릿을 수정할 수 *있습니다*.
 
 하지만 그것은 어리석습니다! TDD는 작업을 수행하는 방법, 특히 설계입니다; 그러나 **모든 것에** 대해 독단적으로 사용해야 한다는 의미는 아닙니다.
 
@@ -446,7 +446,7 @@ Tags: <ul>{{range .Tags}}<li>{{.}}</li>{{end}}</ul>
 
 우리는 여전히 작고 달성 가능한 단계에서 작업하는 가치를 포기해서는 안 됩니다. 변경을 작게 만들고 테스트를 계속 다시 실행하여 하고 있는 것에 대한 실제 피드백을 받는 방법을 찾으십시오.
 
-템플릿 _주변_의 코드를 변경하는 것과 같은 일을 시작하면 물론 TDD 작업 방법으로 돌아가야 할 수 있습니다.
+템플릿 *주변*의 코드를 변경하는 것과 같은 일을 시작하면 물론 TDD 작업 방법으로 돌아가야 할 수 있습니다.
 
 ## 마크업 확장
 
@@ -720,14 +720,14 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it_renders_an_index_of_posts
+=== RUN   TestRender/it*renders*an*index*of_posts
     renderer_test.go:49: got "" want "<ol><li><a href=\"/post/hello-world\">Hello World</a></li><li><a href=\"/post/hello-world-2\">Hello World 2</a></li></ol>"
 --- FAIL: TestRender (0.00s)
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
 
-이것이 _쉬워야_ 하는 것처럼 느껴지지만 조금 어색합니다. 여러 단계로 수행했습니다
+이것이 *쉬워야* 하는 것처럼 느껴지지만 조금 어색합니다. 여러 단계로 수행했습니다
 
 ```go
 func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
@@ -752,10 +752,10 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it_renders_an_index_of_posts
+=== RUN   TestRender/it*renders*an*index*of_posts
     renderer_test.go:49: got "<ol><li><a href=\"/post/Hello%20World\">Hello World</a></li><li><a href=\"/post/Hello%20World%202\">Hello World 2</a></li></ol>" want "<ol><li><a href=\"/post/hello-world\">Hello World</a></li><li><a href=\"/post/hello-world-2\">Hello World 2</a></li></ol>"
 --- FAIL: TestRender (0.00s)
-    --- FAIL: TestRender/it_renders_an_index_of_posts (0.00s)
+    --- FAIL: TestRender/it*renders*an*index*of_posts (0.00s)
 ```
 
 템플릿 코드가 `href` 속성에서 공백을 이스케이프하는 것을 볼 수 있습니다. 공백을 하이픈으로 문자열 교체하는 방법이 필요합니다. `[]Post`를 루프하고 메모리 내에서 교체할 수는 없습니다. 앵커에서 사용자에게 공백이 표시되기를 원하기 때문입니다.
@@ -785,13 +785,13 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 }
 ```
 
-_템플릿을 파싱하기 전에_ 템플릿에 `template.FuncMap`을 추가하여 템플릿 내에서 호출할 수 있는 함수를 정의할 수 있습니다. 이 경우 `sanitiseTitle` 함수를 만들었고 `{{sanitiseTitle .Title}}`로 템플릿 내에서 호출합니다.
+*템플릿을 파싱하기 전에* 템플릿에 `template.FuncMap`을 추가하여 템플릿 내에서 호출할 수 있는 함수를 정의할 수 있습니다. 이 경우 `sanitiseTitle` 함수를 만들었고 `{{sanitiseTitle .Title}}`로 템플릿 내에서 호출합니다.
 
 이것은 강력한 기능입니다. 템플릿에 함수를 보낼 수 있으면 매우 멋진 것을 할 수 있습니다. 하지만 해야 할까요? Mustache의 원칙과 logic-less 템플릿으로 돌아가서, 왜 logic-less를 옹호했을까요? **템플릿에서 로직의 문제점은 무엇입니까?**
 
 보여주었듯이 템플릿을 테스트하려면 *완전히 다른 종류의 테스트를 도입해야 했습니다*.
 
-몇 가지 다른 동작 순열과 엣지 케이스가 있는 템플릿에 함수를 도입한다고 상상해 보세요. **어떻게 테스트할 것입니까**? 이 현재 설계로 이 로직을 테스트하는 유일한 방법은 _HTML을 렌더링하고 문자열을 비교하는 것_입니다. 이것은 로직을 테스트하는 쉽거나 훌륭한 방법이 아니며 _중요한_ 비즈니스 로직에 원하는 것이 분명히 아닙니다.
+몇 가지 다른 동작 순열과 엣지 케이스가 있는 템플릿에 함수를 도입한다고 상상해 보세요. **어떻게 테스트할 것입니까**? 이 현재 설계로 이 로직을 테스트하는 유일한 방법은 *HTML을 렌더링하고 문자열을 비교하는 것*입니다. 이것은 로직을 테스트하는 쉽거나 훌륭한 방법이 아니며 *중요한* 비즈니스 로직에 원하는 것이 분명히 아닙니다.
 
 승인 테스트 기술이 이러한 테스트 유지 비용을 줄였지만 작성하는 대부분의 단위 테스트보다 유지 비용이 여전히 더 비쌉니다. 마크업을 약간 변경하면 여전히 민감합니다. 관리하기 쉽게 만들었을 뿐입니다. 템플릿 주변에 많은 테스트를 작성할 필요가 없도록 코드를 설계하고 렌더링 코드 내에 있을 필요가 없는 로직이 제대로 분리되도록 노력해야 합니다.
 
@@ -807,7 +807,7 @@ Mustache의 영향을 받은 템플릿 엔진이 제공하는 것은 유용한 �
 
 템플릿 코드에서 보내는 타입에 대해 메서드를 호출할 수 있으므로 `Post`에 `SanitisedTitle` 메서드를 추가할 수 있습니다. 이것은 템플릿을 단순화하고 원한다면 이 로직을 별도로 쉽게 단위 테스트할 수 있습니다. 이것은 아마도 가장 쉬운 솔루션이지만 가장 간단한 것은 아닐 수 있습니다.
 
-이 접근 방식의 단점은 이것이 여전히 _뷰_ 로직이라는 것입니다. 시스템의 나머지 부분에는 관심이 없지만 이제 핵심 도메인 객체에 대한 API의 일부가 됩니다. 이러한 접근 방식은 시간이 지남에 따라 [God Objects](https://en.wikipedia.org/wiki/God_object)를 만들게 할 수 있습니다.
+이 접근 방식의 단점은 이것이 여전히 *뷰* 로직이라는 것입니다. 시스템의 나머지 부분에는 관심이 없지만 이제 핵심 도메인 객체에 대한 API의 일부가 됩니다. 이러한 접근 방식은 시간이 지남에 따라 [God Objects](https://en.wikipedia.org/wiki/God_object)를 만들게 할 수 있습니다.
 
 #### 필요한 데이터만 있는 전용 뷰 모델 타입 생성, 예: `PostViewModel`
 
@@ -893,9 +893,9 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 }
 ```
 
-`templ`에 둘 이상의 템플릿을 파싱함으로써 이제 `ExecuteTemplate`을 호출하고 적절하게 렌더링할 _어떤_ 템플릿을 지정해야 하지만 도착한 코드가 훌륭하게 보인다는 데 동의할 것입니다.
+`templ`에 둘 이상의 템플릿을 파싱함으로써 이제 `ExecuteTemplate`을 호출하고 적절하게 렌더링할 *어떤* 템플릿을 지정해야 하지만 도착한 코드가 훌륭하게 보인다는 데 동의할 것입니다.
 
-누군가가 템플릿 파일 중 하나의 이름을 바꾸면 버그가 발생할 수 있는 _약간의_ 위험이 있지만 빠르게 실행되는 단위 테스트가 이것을 빠르게 잡을 것입니다.
+누군가가 템플릿 파일 중 하나의 이름을 바꾸면 버그가 발생할 수 있는 *약간의* 위험이 있지만 빠르게 실행되는 단위 테스트가 이것을 빠르게 잡을 것입니다.
 
 이제 패키지의 API 디자인에 만족하고 TDD로 일부 기본 동작을 이끌어냈으므로 승인을 사용하도록 테스트를 변경합시다.
 
@@ -1006,7 +1006,7 @@ Go는 웹 개발에 훌륭합니다. 특히 만드는 웹사이트의 실제 요
 ### 배운 것
 
 - HTML 템플릿을 만들고 렌더링하는 방법.
-- 템플릿을 함께 구성하고 관련 마크업을 [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself)하여 일관된 모양과 느낌을 유지하는 데 도움이 되는 방법.
+- 템플릿을 함께 구성하고 관련 마크업을 [DRY](https://en.wikipedia.org/wiki/Don't*repeat*yourself)하여 일관된 모양과 느낌을 유지하는 데 도움이 되는 방법.
 - 템플릿에 함수를 전달하는 방법과 왜 두 번 생각해야 하는지.
 - 템플릿 렌더러와 같은 크고 못생긴 출력을 테스트하는 데 도움이 되는 "승인 테스트"를 작성하는 방법.
 

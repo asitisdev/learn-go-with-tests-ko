@@ -282,7 +282,7 @@ func (d Dictionary) Add(word, definition string) {
 
 맵의 흥미로운 속성은 주소를 전달하지 않고도 수정할 수 있다는 것입니다 (예: `&myMap`)
 
-이것은 "참조 타입"처럼 _느껴_지게 할 수 있지만, [Dave Cheney가 설명하듯이](https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it) 그렇지 않습니다.
+이것은 "참조 타입"처럼 *느껴*지게 할 수 있지만, [Dave Cheney가 설명하듯이](https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it) 그렇지 않습니다.
 
 > 맵 값은 runtime.hmap 구조체에 대한 포인터입니다.
 
