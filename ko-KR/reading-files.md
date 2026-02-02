@@ -36,7 +36,7 @@ type Post struct {
 
 목표를 향해 항상 간단하고 안전한 단계를 밟는 반복적인 접근 방식을 취할 것입니다.
 
-이것은 작업을 분할해야 하지만, ["바텀업"](https://en.wikipedia.org/wiki/Top-down*and*bottom-up_design) 접근 방식을 취하는 함정에 빠지지 않도록 주의해야 합니다.
+이것은 작업을 분할해야 하지만, ["바텀업"](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design) 접근 방식을 취하는 함정에 빠지지 않도록 주의해야 합니다.
 
 작업을 시작할 때 과잉 활동적인 상상력을 신뢰해서는 안 됩니다. 모든 것을 함께 붙일 때만 검증되는 `BlogPostFileParser`와 같은 일종의 추상화를 만들고 싶을 수 있습니다.
 
@@ -126,7 +126,7 @@ func TestNewBlogPosts(t *testing.T) {
 }
 ```
 
-테스트 패키지가 `blogposts*test`임을 주목하세요. 기억하세요, TDD가 잘 실행되면 *소비자 주도_ 접근 방식을 취합니다: *소비자*가 관심을 갖지 않기 때문에 내부 세부 사항을 테스트하고 싶지 않습니다. 의도된 패키지 이름에 `_test`를 추가하면 실제 패키지 사용자처럼 패키지에서 내보낸 멤버에만 액세스합니다.
+테스트 패키지가 `blogposts_test`임을 주목하세요. 기억하세요, TDD가 잘 실행되면 *소비자 주도* 접근 방식을 취합니다: *소비자*가 관심을 갖지 않기 때문에 내부 세부 사항을 테스트하고 싶지 않습니다. 의도된 패키지 이름에 `_test`를 추가하면 실제 패키지 사용자처럼 패키지에서 내보낸 멤버에만 액세스합니다.
 
 [`fstest.MapFS`](https://golang.org/pkg/testing/fstest/#MapFS) 타입에 대한 액세스를 제공하는 [`testing/fstest`](https://golang.org/pkg/testing/fstest/)를 가져왔습니다. 가짜 파일 시스템은 `fstest.MapFS`를 패키지에 전달합니다.
 

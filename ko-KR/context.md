@@ -127,7 +127,7 @@ t.Run("tells store to cancel work if request is cancelled", func(t *testing.T) {
 
 ```
 --- FAIL: TestServer (0.00s)
-    --- FAIL: TestServer/tells*store*to*cancel*work*if*request*is*cancelled (0.00s)
+    --- FAIL: TestServer/tells_store_to_cancel_work_if_request_is_cancelled (0.00s)
     	context_test.go:62: store was not told to cancel
 ```
 
@@ -373,9 +373,9 @@ t.Run("returns data from store", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestServer/returns*data*from_store
+=== RUN   TestServer/returns_data_from_store
 --- FAIL: TestServer (0.00s)
-    --- FAIL: TestServer/returns*data*from_store (0.00s)
+    --- FAIL: TestServer/returns_data_from_store (0.00s)
     	context_test.go:22: got "", want "hello, world"
 ```
 
@@ -444,9 +444,9 @@ t.Run("tells store to cancel work if request is cancelled", func(t *testing.T) {
 
 ```
 === RUN   TestServer
-=== RUN   TestServer/tells*store*to*cancel*work*if*request*is*cancelled
+=== RUN   TestServer/tells_store_to_cancel_work_if_request_is_cancelled
 --- FAIL: TestServer (0.01s)
-    --- FAIL: TestServer/tells*store*to*cancel*work*if*request*is*cancelled (0.01s)
+    --- FAIL: TestServer/tells_store_to_cancel_work_if_request_is_cancelled (0.01s)
     	context_test.go:47: a response should not have been written
 ```
 

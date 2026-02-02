@@ -104,7 +104,7 @@ func Registration(w http.ResponseWriter, r *http.Request) {
 
 ## HTTP 핸들러란 무엇이고 무엇을 해야 하나요?
 
-잠시 Go의 특정 세부 사항을 잊고, 어떤 언어로 작업했든 항상 저에게 도움이 된 것은 [관심사 분리](https://en.wikipedia.org/wiki/Separation*of*concerns)와 [단일 책임 원칙](https://en.wikipedia.org/wiki/Single-responsibility_principle)에 대해 생각하는 것입니다.
+잠시 Go의 특정 세부 사항을 잊고, 어떤 언어로 작업했든 항상 저에게 도움이 된 것은 [관심사 분리](https://en.wikipedia.org/wiki/Separation_of_concerns)와 [단일 책임 원칙](https://en.wikipedia.org/wiki/Single-responsibility_principle)에 대해 생각하는 것입니다.
 
 해결하려는 문제에 따라 적용하기가 꽤 까다로울 수 있습니다. 책임이 정확히 *무엇*입니까?
 

@@ -154,9 +154,9 @@ var dummySpyAlerter = &SpyBlindAlerter{}
 
 ```
 === RUN   TestCLI
-=== RUN   TestCLI/it*schedules*printing*of*blind_values
+=== RUN   TestCLI/it_schedules_printing_of_blind_values
 --- FAIL: TestCLI (0.00s)
-    --- FAIL: TestCLI/it*schedules*printing*of*blind_values (0.00s)
+    --- FAIL: TestCLI/it_schedules_printing_of_blind_values (0.00s)
     	CLI_test.go:38: expected a blind alert to be scheduled
 ```
 
@@ -252,13 +252,13 @@ func (cli *CLI) PlayPoker() {
 ```
 === RUN   TestCLI
 --- FAIL: TestCLI (0.00s)
-=== RUN   TestCLI/it*schedules*printing*of*blind_values
-    --- FAIL: TestCLI/it*schedules*printing*of*blind_values (0.00s)
-=== RUN   TestCLI/it*schedules*printing*of*blind*values/100*scheduled*for*0s
-        --- FAIL: TestCLI/it*schedules*printing*of*blind*values/100*scheduled*for*0s (0.00s)
+=== RUN   TestCLI/it_schedules_printing_of_blind_values
+    --- FAIL: TestCLI/it_schedules_printing_of_blind_values (0.00s)
+=== RUN   TestCLI/it_schedules_printing_of_blind_values/100_scheduled_for_0s
+        --- FAIL: TestCLI/it_schedules_printing_of_blind_values/100_scheduled_for_0s (0.00s)
         	CLI_test.go:71: got scheduled time of 5s, want 0s
-=== RUN   TestCLI/it*schedules*printing*of*blind*values/200*scheduled*for*10m0s
-        --- FAIL: TestCLI/it*schedules*printing*of*blind*values/200*scheduled*for*10m0s (0.00s)
+=== RUN   TestCLI/it_schedules_printing_of_blind_values/200_scheduled_for_10m0s
+        --- FAIL: TestCLI/it_schedules_printing_of_blind_values/200_scheduled_for_10m0s (0.00s)
         	CLI_test.go:59: alert 1 was not scheduled [{5000000000 100}]
 ```
 
@@ -477,8 +477,8 @@ func NewCLI(store PlayerStore, in io.Reader, out io.Writer, alerter BlindAlerter
 ```
 === RUN   TestCLI
 --- FAIL: TestCLI (0.00s)
-=== RUN   TestCLI/it*prompts*the*user*to*enter*the*number*of_players
-    --- FAIL: TestCLI/it*prompts*the*user*to*enter*the*number*of_players (0.00s)
+=== RUN   TestCLI/it_prompts_the_user_to_enter_the_number_of_players
+    --- FAIL: TestCLI/it_prompts_the_user_to_enter_the_number_of_players (0.00s)
     	CLI_test.go:46: got '', want 'Please enter the number of players: '
 FAIL
 ```
@@ -580,11 +580,11 @@ t.Run("it prompts the user to enter the number of players", func(t *testing.T) {
 ```
 === RUN   TestCLI
 --- FAIL: TestCLI (0.00s)
-=== RUN   TestCLI/it*prompts*the*user*to*enter*the*number*of_players
-    --- FAIL: TestCLI/it*prompts*the*user*to*enter*the*number*of_players (0.00s)
-=== RUN   TestCLI/it*prompts*the*user*to*enter*the*number*of*players/100*chips*at*0s
-        --- PASS: TestCLI/it*prompts*the*user*to*enter*the*number*of*players/100*chips*at*0s (0.00s)
-=== RUN   TestCLI/it*prompts*the*user*to*enter*the*number*of*players/200*chips*at*12m0s
+=== RUN   TestCLI/it_prompts_the_user_to_enter_the_number_of_players
+    --- FAIL: TestCLI/it_prompts_the_user_to_enter_the_number_of_players (0.00s)
+=== RUN   TestCLI/it_prompts_the_user_to_enter_the_number_of_players/100_chips_at_0s
+        --- PASS: TestCLI/it_prompts_the_user_to_enter_the_number_of_players/100_chips_at_0s (0.00s)
+=== RUN   TestCLI/it_prompts_the_user_to_enter_the_number_of_players/200_chips_at_12m0s
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -927,8 +927,8 @@ t.Run("it prints an error when a non numeric value is entered and does not start
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestCLI/it*prints*an*error*when*a*non*numeric*value*is*entered*and*does*not*start*the*game
-    --- FAIL: TestCLI/it*prints*an*error*when*a*non*numeric*value*is*entered*and*does*not*start*the*game (0.00s)
+=== RUN   TestCLI/it_prints_an_error_when_a_non_numeric_value_is_entered_and_does_not_start_the_game
+    --- FAIL: TestCLI/it_prints_an_error_when_a_non_numeric_value_is_entered_and_does_not_start_the_game (0.00s)
         CLI_test.go:62: game should not have started
 ```
 
@@ -965,8 +965,8 @@ stdout에 쓰여진 *모든 것*을 저장하므로 여전히 `poker.PlayerPromp
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestCLI/it*prints*an*error*when*a*non*numeric*value*is*entered*and*does*not*start*the*game
-    --- FAIL: TestCLI/it*prints*an*error*when*a*non*numeric*value*is*entered*and*does*not*start*the*game (0.00s)
+=== RUN   TestCLI/it_prints_an_error_when_a_non_numeric_value_is_entered_and_does_not_start_the_game
+    --- FAIL: TestCLI/it_prints_an_error_when_a_non_numeric_value_is_entered_and_does_not_start_the_game (0.00s)
         CLI_test.go:70: got 'Please enter the number of players: ', want 'Please enter the number of players: you're so silly'
 ```
 

@@ -95,7 +95,7 @@ res, err := client.Get(baseURL + "/user/" + id)
 
 ### 일반적으로 DRY
 
-[DRY](https://en.wikipedia.org/wiki/Don%27t*repeat*yourself)는 요즘 나쁜 평판을 받고 있으며 어느 정도 정당화됩니다. DRY는 피상적인 수준에서 *너무* 이해하기 쉽고 그런 다음 잘못 적용되는 개념 중 하나입니다.
+[DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)는 요즘 나쁜 평판을 받고 있으며 어느 정도 정당화됩니다. DRY는 피상적인 수준에서 *너무* 이해하기 쉽고 그런 다음 잘못 적용되는 개념 중 하나입니다.
 
 엔지니어는 일부 코드 줄을 절약하기 위해 당혹스럽고 얽힌 추상화를 만들면서 DRY를 너무 멀리 가져갈 수 있습니다. DRY의 *진정한* 아이디어인 한 곳에 *아이디어*를 캡처하는 것 대신. 코드 줄 수를 줄이는 것은 종종 DRY의 부작용이지만, **실제 목표는 아닙니다**.
 
@@ -113,7 +113,7 @@ res, err := client.Get(baseURL + "/user/" + id)
 
 ### "마법" 값 추출
 
-> [설명되지 않은 의미 또는 여러 번 발생하는 고유한 값으로 (가급적) 명명된 상수로 대체될 수 있음](https://en.wikipedia.org/wiki/Magic*number*(programming))
+> [설명되지 않은 의미 또는 여러 번 발생하는 고유한 값으로 (가급적) 명명된 상수로 대체될 수 있음](https://en.wikipedia.org/wiki/Magic_number_(programming))
 
 변수 추출(`command+option+v`) 또는 상수(`command+option+c`)를 사용하여 마법 값에 의미를 부여하세요. 이것은 인라인 리팩토링의 역으로 볼 수 있습니다. 저는 종종 무엇이 더 잘 읽히는지 판단하는 데 도움이 되도록 인라인과 추출로 코드를 "토글"합니다.
 

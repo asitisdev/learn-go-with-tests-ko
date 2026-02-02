@@ -221,7 +221,7 @@ created by github.com/gypsydave5/learn-go-with-tests/concurrency/v3.WebsiteCheck
 
 이것은 *레이스 조건* (경쟁 상태)입니다. 소프트웨어의 출력이 우리가 제어할 수 없는 이벤트의 타이밍과 시퀀스에 의존할 때 발생하는 버그입니다. 각 고루틴이 results 맵에 언제 쓰는지 정확히 제어할 수 없기 때문에, 두 고루틴이 동시에 쓸 수 있는 취약점이 있습니다.
 
-Go는 내장된 [*레이스 감지기*][godoc*race*detector]로 레이스 조건을 발견하는 데 도움을 줄 수 있습니다. 이 기능을 활성화하려면 `race` 플래그와 함께 테스트를 실행하세요: `go test -race`.
+Go는 내장된 [*레이스 감지기*][godoc_race_detector]로 레이스 조건을 발견하는 데 도움을 줄 수 있습니다. 이 기능을 활성화하려면 `race` 플래그와 함께 테스트를 실행하세요: `go test -race`.
 
 다음과 같은 출력을 받아야 합니다:
 
@@ -366,5 +366,5 @@ ok      github.com/gypsydave5/learn-go-with-tests/concurrency/v2        2.377s
 
 [DI]: dependency-injection.md
 [wrf]: http://wiki.c2.com/?MakeItWorkMakeItRightMakeItFast
-[godoc*race*detector]: https://blog.golang.org/race-detector
+[godoc_race_detector]: https://blog.golang.org/race-detector
 [popt]: http://wiki.c2.com/?PrematureOptimization

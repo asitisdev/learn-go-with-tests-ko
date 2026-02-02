@@ -87,8 +87,8 @@ func TestGame(t *testing.T) {
 
 ```
 --- FAIL: TestGame (0.00s)
-=== RUN   TestGame/GET_/game*returns*200
-    --- FAIL: TestGame/GET_/game*returns*200 (0.00s)
+=== RUN   TestGame/GET_/game_returns_200
+    --- FAIL: TestGame/GET_/game_returns_200 (0.00s)
     	server_test.go:109: did not get correct status, got 404, want 200
 ```
 
@@ -256,8 +256,8 @@ t.Run("when we get a message over a websocket it is a winner of a game", func(t 
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestGame/when*we*get*a*message*over*a*websocket*it*is*a*winner*of*a*game
-    --- FAIL: TestGame/when*we*get*a*message*over*a*websocket*it*is*a*winner*of*a*game (0.00s)
+=== RUN   TestGame/when_we_get_a_message_over_a_websocket_it_is_a_winner_of_a_game
+    --- FAIL: TestGame/when_we_get_a_message_over_a_websocket_it_is_a_winner_of_a_game (0.00s)
         server_test.go:124: could not open a ws connection on ws://127.0.0.1:55838/ws websocket: bad handshake
 ```
 
@@ -286,8 +286,8 @@ func (p *PlayerServer) webSocket(w http.ResponseWriter, r *http.Request) {
 웹소켓 연결을 수락하려면 요청을 `Upgrade`합니다. 이제 테스트를 다시 실행하면 다음 에러로 이동해야 합니다.
 
 ```
-=== RUN   TestGame/when*we*get*a*message*over*a*websocket*it*is*a*winner*of*a*game
-    --- FAIL: TestGame/when*we*get*a*message*over*a*websocket*it*is*a*winner*of*a*game (0.00s)
+=== RUN   TestGame/when_we_get_a_message_over_a_websocket_it_is_a_winner_of_a_game
+    --- FAIL: TestGame/when_we_get_a_message_over_a_websocket_it_is_a_winner_of_a_game (0.00s)
         server_test.go:132: got 0 calls to RecordWin want 1
 ```
 
@@ -674,9 +674,9 @@ func NewPlayerServer(store PlayerStore, game Game) (*PlayerServer, error)
 드디어!
 
 ```
-=== RUN   TestGame/start*a*game*with*3*players*and*declare*Ruth*the*winner
+=== RUN   TestGame/start_a_game_with_3_players_and_declare_Ruth_the_winner
 --- FAIL: TestGame (0.01s)
-    --- FAIL: TestGame/start*a*game*with*3*players*and*declare*Ruth*the*winner (0.01s)
+    --- FAIL: TestGame/start_a_game_with_3_players_and_declare_Ruth_the_winner (0.01s)
     	server_test.go:146: wanted Start called with 3 but got 0
     	server_test.go:147: expected finish called with 'Ruth' but got ''
 FAIL
@@ -738,7 +738,7 @@ func (p *PlayerServer) webSocket(w http.ResponseWriter, r *http.Request) {
 
 ```go
 func main() {
-	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -1009,9 +1009,9 @@ t.Run("start a game with 3 players, send some blind alerts down WS and declare R
 
 ```
 === RUN   TestGame
-=== RUN   TestGame/start*a*game*with*3*players,*send*some*blind*alerts*down*WS*and*declare*Ruth*the*winner
+=== RUN   TestGame/start_a_game_with_3_players,_send_some_blind_alerts_down_WS_and_declare_Ruth_the_winner
 --- FAIL: TestGame (0.02s)
-    --- FAIL: TestGame/start*a*game*with*3*players,*send*some*blind*alerts*down*WS*and*declare*Ruth*the*winner (0.02s)
+    --- FAIL: TestGame/start_a_game_with_3_players,_send_some_blind_alerts_down_WS_and_declare_Ruth_the_winner (0.02s)
     	server_test.go:143: timed out
     	server_test.go:150: got "", want "Blind is 100"
 ```

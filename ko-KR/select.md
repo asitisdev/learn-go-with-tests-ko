@@ -321,7 +321,7 @@ func Racer(a, b string) (winner string, error error) {
 
 ```
 --- FAIL: TestRacer (12.00s)
-    --- FAIL: TestRacer/returns*an*error*if*a*server*doesn't*respond*within_10s (12.00s)
+    --- FAIL: TestRacer/returns_an_error_if_a_server_doesn't_respond_within_10s (12.00s)
         racer_test.go:40: expected an error but didn't get one
 ```
 

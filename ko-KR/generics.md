@@ -135,7 +135,7 @@ func InterfaceyFoo(x, y interface{})
 
 ## 제네릭 데이터 타입
 
-[스택](https://en.wikipedia.org/wiki/Stack_(abstract*data*type)) 데이터 타입을 만들 것입니다. 스택은 요구 사항 관점에서 이해하기 쉬워야 합니다. 항목을 "상단"으로 `Push`하고 다시 가져오려면 상단에서 `Pop`하는 항목 컬렉션입니다 (LIFO - 후입선출).
+[스택](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) 데이터 타입을 만들 것입니다. 스택은 요구 사항 관점에서 이해하기 쉬워야 합니다. 항목을 "상단"으로 `Push`하고 다시 가져오려면 상단에서 `Pop`하는 항목 컬렉션입니다 (LIFO - 후입선출).
 
 ### 제네릭 없이
 

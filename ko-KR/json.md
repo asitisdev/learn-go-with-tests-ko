@@ -55,7 +55,7 @@ func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
 ```
 
 ```go
-// in*memory*player_store.go
+// in_memory_player_store.go
 package main
 
 func NewInMemoryPlayerStore() *InMemoryPlayerStore {
@@ -121,7 +121,7 @@ func TestLeague(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-    --- FAIL: TestLeague/it*returns*200*on*/league (0.00s)
+    --- FAIL: TestLeague/it_returns_200_on_/league (0.00s)
         server_test.go:101: status code is wrong: got 404, want 200
 FAIL
 FAIL	playerstore	0.221s
@@ -260,7 +260,7 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 }
 ```
 
-그런 다음 `server*test.go`, `server*integration_test.go`, `main.go`에서 `server := &PlayerServer{&store}`를 `server := NewPlayerServer(&store)`로 교체합니다.
+그런 다음 `server_test.go`, `server_integration_test.go`, `main.go`에서 `server := &PlayerServer{&store}`를 `server := NewPlayerServer(&store)`로 교체합니다.
 
 마지막으로 `func (p *PlayerServer) ServeHTTP(w http.ResponseWriter, r *http.Request)`를 **삭제**하세요. 더 이상 필요하지 않습니다!
 
@@ -387,8 +387,8 @@ JSON 파싱이 실패할 수 있으므로 `Decode`는 `error`를 반환할 수 �
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestLeague/it*returns*200*on*/league
-    --- FAIL: TestLeague/it*returns*200*on*/league (0.00s)
+=== RUN   TestLeague/it_returns_200_on_/league
+    --- FAIL: TestLeague/it_returns_200_on_/league (0.00s)
         server_test.go:107: Unable to parse response from server '' into slice of Player, 'unexpected end of JSON input'
 ```
 
@@ -507,8 +507,8 @@ func TestLeague(t *testing.T) {
 테스트를 다시 실행하면 다음을 얻어야 합니다
 
 ```
-=== RUN   TestLeague/it*returns*the*league*table*as*JSON
-    --- FAIL: TestLeague/it*returns*the*league*table*as*JSON (0.00s)
+=== RUN   TestLeague/it_returns_the_league_table_as_JSON
+    --- FAIL: TestLeague/it_returns_the*league_table_as_JSON (0.00s)
         server_test.go:124: got [{Chris 20}] want [{Cleo 32} {Chris 20} {Tiest 14}]
 ```
 
@@ -541,7 +541,7 @@ func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
 # github.com/quii/learn-go-with-tests/json-and-io/v4
 ./main.go:9:50: cannot use NewInMemoryPlayerStore() (type *InMemoryPlayerStore) as type PlayerStore in argument to NewPlayerServer:
     *InMemoryPlayerStore does not implement PlayerStore (missing GetLeague method)
-./server*integration*test.go:11:27: cannot use store (type *InMemoryPlayerStore) as type PlayerStore in argument to NewPlayerServer:
+./server_integration_test.go:11:27: cannot use store (type *InMemoryPlayerStore) as type PlayerStore in argument to NewPlayerServer:
     *InMemoryPlayerStore does not implement PlayerStore (missing GetLeague method)
 ./server_test.go:36:28: cannot use &store (type *StubPlayerStore) as type PlayerStore in argument to NewPlayerServer:
     *StubPlayerStore does not implement PlayerStore (missing GetLeague method)
@@ -565,7 +565,7 @@ func (s *StubPlayerStore) GetLeague() []Player {
 `InMemoryStore`가 어떻게 구현되어 있는지 상기합니다.
 
 ```go
-//in*memory*player_store.go
+//in_memory_player_store.go
 type InMemoryPlayerStore struct {
 	store map[string]int
 }
@@ -576,7 +576,7 @@ type InMemoryPlayerStore struct {
 그래서 지금은 컴파일러를 행복하게 하고 `InMemoryStore`의 불완전한 구현의 불편한 느낌과 함께 살아봅시다.
 
 ```go
-//in*memory*player_store.go
+//in_memory_player_store.go
 func (i *InMemoryPlayerStore) GetLeague() []Player {
 	return nil
 }
@@ -657,8 +657,8 @@ if response.Result().Header.Get("content-type") != "application/json" {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestLeague/it*returns*the*league*table*as*JSON
-    --- FAIL: TestLeague/it*returns*the*league*table*as*JSON (0.00s)
+=== RUN   TestLeague/it_returns_the_league_table_as_JSON
+    --- FAIL: TestLeague/it_returns_the_league_table_as_JSON (0.00s)
         server_test.go:124: response did not have content-type of application/json, got map[Content-Type:[text/plain; charset=utf-8]]
 ```
 
@@ -718,7 +718,7 @@ assertContentType(t, response, jsonContentType)
 `t.Run`을 사용하여 이 테스트를 약간 분리하고 서버 테스트의 헬퍼를 재사용할 수 있습니다 - 다시 한번 테스트 리팩토링의 중요성을 보여줍니다.
 
 ```go
-//server*integration*test.go
+//server_integration_test.go
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 	store := NewInMemoryPlayerStore()
 	server := NewPlayerServer(store)
@@ -755,7 +755,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 ```
 === RUN   TestRecordingWinsAndRetrievingThem/get_league
     --- FAIL: TestRecordingWinsAndRetrievingThem/get_league (0.00s)
-        server*integration*test.go:35: got [] want [{Pepper 3}]
+        server_integration_test.go:35: got [] want [{Pepper 3}]
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -763,7 +763,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 `InMemoryPlayerStore`는 `GetLeague()`를 호출할 때 `nil`을 반환하므로 수정해야 합니다.
 
 ```go
-//in*memory*player_store.go
+//in_memory_player_store.go
 func (i *InMemoryPlayerStore) GetLeague() []Player {
 	var league []Player
 	for name, wins := range i.store {
@@ -784,5 +784,5 @@ TDD를 사용하여 프로그램을 계속 안전하게 반복하여 라우터�
 다룬 내용:
 
 - **라우팅**. 표준 라이브러리는 라우팅을 수행하기 위한 사용하기 쉬운 타입을 제공합니다. `Handler`에 경로를 할당하고 라우터 자체도 `Handler`라는 점에서 `http.Handler` 인터페이스를 완전히 수용합니다. 그러나 경로 변수(예: `/users/{id}`)와 같이 예상할 수 있는 일부 기능은 없습니다. 이 정보를 직접 쉽게 파싱할 수 있지만 부담이 되면 다른 라우팅 라이브러리를 살펴보는 것이 좋습니다. 대부분의 인기 있는 라이브러리는 `http.Handler`를 구현하는 표준 라이브러리의 철학을 고수합니다.
-- **타입 임베딩**. 이 기법에 대해 약간 다뤘지만 [Effective Go에서 더 많이 배울 수 있습니다](https://golang.org/doc/effective*go.html#embedding). 이것에서 얻어야 할 한 가지가 있다면 매우 유용할 수 있지만 *항상 공개 API에 대해 생각하고 적절한 것만 노출하세요_.
+- **타입 임베딩**. 이 기법에 대해 약간 다뤘지만 [Effective Go에서 더 많이 배울 수 있습니다](https://golang.org/doc/effective_go.html#embedding). 이것에서 얻어야 할 한 가지가 있다면 매우 유용할 수 있지만 _항상 공개 API에 대해 생각하고 적절한 것만 노출하세요_.
 - **JSON 역직렬화 및 직렬화**. 표준 라이브러리는 데이터를 직렬화하고 역직렬화하는 것을 매우 간단하게 만듭니다. 또한 구성 가능하며 필요한 경우 이러한 데이터 변환이 작동하는 방식을 사용자 정의할 수 있습니다.

@@ -122,8 +122,8 @@ func PlayerServer(w http.ResponseWriter, r *http.Request) {
 코드가 이제 컴파일되고 테스트가 실패합니다
 
 ```
-=== RUN   TestGETPlayers/returns*Pepper's*score
-    --- FAIL: TestGETPlayers/returns*Pepper's*score (0.00s)
+=== RUN   TestGETPlayers/returns_Pepper's_score
+    --- FAIL: TestGETPlayers/returns_Pepper's_score (0.00s)
         server_test.go:20: got '', want '20'
 ```
 
@@ -216,10 +216,10 @@ t.Run("returns Floyd's score", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestGETPlayers/returns*Pepper's*score
-    --- PASS: TestGETPlayers/returns*Pepper's*score (0.00s)
-=== RUN   TestGETPlayers/returns*Floyd's*score
-    --- FAIL: TestGETPlayers/returns*Floyd's*score (0.00s)
+=== RUN   TestGETPlayers/returns_Pepper's_score
+    --- PASS: TestGETPlayers/returns_Pepper's_score (0.00s)
+=== RUN   TestGETPlayers/returns_Floyd's_score
+    --- FAIL: TestGETPlayers/returns_Floyd's_score (0.00s)
         server_test.go:34: got '20', want '10'
 ```
 
@@ -524,8 +524,8 @@ t.Run("returns 404 on missing players", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestGETPlayers/returns*404*on*missing*players
-    --- FAIL: TestGETPlayers/returns*404*on*missing*players (0.00s)
+=== RUN   TestGETPlayers/returns_404_on_missing_players
+    --- FAIL: TestGETPlayers/returns_404_on_missing_players (0.00s)
         server_test.go:56: got status 200 want 404
 ```
 
@@ -662,8 +662,8 @@ func TestStoreWins(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestStoreWins/it*returns*accepted*on*POST
-    --- FAIL: TestStoreWins/it*returns*accepted*on*POST (0.00s)
+=== RUN   TestStoreWins/it_returns_accepted_on_POST
+    --- FAIL: TestStoreWins/it_returns_accepted_on_POST (0.00s)
         server_test.go:70: did not get correct status, got 404, want 202
 ```
 
@@ -802,7 +802,7 @@ store := StubPlayerStore{
 
 ```
 --- FAIL: TestStoreWins (0.00s)
-    --- FAIL: TestStoreWins/it*records*wins*when*POST (0.00s)
+    --- FAIL: TestStoreWins/it_records_wins_when_POST (0.00s)
         server_test.go:80: got 0 calls to RecordWin want 1
 ```
 
@@ -887,8 +887,8 @@ func TestStoreWins(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestStoreWins/it*records*wins*on*POST
-    --- FAIL: TestStoreWins/it*records*wins*on*POST (0.00s)
+=== RUN   TestStoreWins/it_records_wins_on_POST
+    --- FAIL: TestStoreWins/it_records_wins_on_POST (0.00s)
         server_test.go:86: did not store correct winner got 'Bob' want 'Pepper'
 ```
 
@@ -959,7 +959,7 @@ func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
 간결성을 위해 최종 리팩토링된 통합 테스트를 보여 드리겠습니다.
 
 ```go
-// server*integration*test.go
+// server_integration_test.go
 package main
 
 import (
@@ -993,7 +993,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 
 ```
 --- FAIL: TestRecordingWinsAndRetrievingThem (0.00s)
-    server*integration*test.go:24: response body is wrong, got '123' want '3'
+    server_integration_test.go:24: response body is wrong, got '123' want '3'
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -1005,7 +1005,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 이 시나리오에서 막히면 실패하는 테스트로 변경 사항을 되돌리고 솔루션을 도출하는 데 도움이 되도록 `InMemoryPlayerStore` 주변에 더 구체적인 단위 테스트를 작성할 것입니다.
 
 ```go
-//in*memory*player_store.go
+//in_memory_player_store.go
 func NewInMemoryPlayerStore() *InMemoryPlayerStore {
 	return &InMemoryPlayerStore{map[string]int{}}
 }
@@ -1026,7 +1026,7 @@ func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
 -   데이터를 저장해야 하므로 `InMemoryPlayerStore` 구조체에 `map[string]int`를 추가했습니다
 -   편의를 위해 스토어를 초기화하는 `NewInMemoryPlayerStore`를 만들고 통합 테스트를 업데이트하여 사용합니다:
     ```go
-    //server*integration*test.go
+    //server_integration_test.go
     store := NewInMemoryPlayerStore()
     server := PlayerServer{store}
     ```

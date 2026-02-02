@@ -125,7 +125,7 @@ t.Run("behaves like a normal reader", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-./cancel*readers*test.go:12:10: undefined: NewCancellableReader
+./cancel_readers_test.go:12:10: undefined: NewCancellableReader
 ```
 ## 테스트를 실행하고 실패하는 테스트 출력을 확인하기 위한 최소한의 코드 작성
 
@@ -141,7 +141,7 @@ func NewCancellableReader(rdr io.Reader) io.Reader {
 
 ```
 === RUN   TestCancelReaders
-=== RUN   TestCancelReaders/behaves*like*a*normal*reader
+=== RUN   TestCancelReaders/behaves_like_a_normal_reader
 panic: runtime error: invalid memory address or nil pointer dereference [recovered]
 	panic: runtime error: invalid memory address or nil pointer dereference
 [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x10f8fb5]
@@ -202,7 +202,7 @@ t.Run("stops reading when cancelled", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-./cancel*readers*test.go:33:30: too many arguments in call to NewCancellableReader
+./cancel_readers_test.go:33:30: too many arguments in call to NewCancellableReader
 	have (context.Context, *strings.Reader)
 	want (io.Reader)
 ```
@@ -223,11 +223,11 @@ func NewCancellableReader(ctx context.Context, rdr io.Reader) io.Reader {
 
 ```
 === RUN   TestCancelReaders
-=== RUN   TestCancelReaders/stops*reading*when_cancelled
+=== RUN   TestCancelReaders/stops_reading_when_cancelled
 --- FAIL: TestCancelReaders (0.00s)
-    --- FAIL: TestCancelReaders/stops*reading*when_cancelled (0.00s)
-        cancel*readers*test.go:48: expected an error but didn't get one
-        cancel*readers*test.go:52: expected 0 bytes to be read after cancellation but 3 were read
+    --- FAIL: TestCancelReaders/stops_reading_when_cancelled (0.00s)
+        cancel_readers_test.go:48: expected an error but didn't get one
+        cancel_readers_test.go:52: expected 0 bytes to be read after cancellation but 3 were read
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -253,7 +253,7 @@ type readerCtx struct {
 이 책에서 여러 번 강조했듯이, 천천히 가고 컴파일러가 도와주도록 하세요
 
 ```
-./cancel*readers*test.go:60:3: cannot use &readerCtx literal (type *readerCtx) as type io.Reader in return argument:
+./cancel_readers_test.go:60:3: cannot use &readerCtx literal (type _readerCtx) as type io.Reader in return argument:
 	*readerCtx does not implement io.Reader (missing Read method)
 ```
 

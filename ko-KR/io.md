@@ -88,7 +88,7 @@ func (p *PlayerServer) processWin(w http.ResponseWriter, player string) {
 ```
 
 ```go
-// in*memory*player_store.go
+// in_memory_player_store.go
 package main
 
 func NewInMemoryPlayerStore() *InMemoryPlayerStore {
@@ -150,7 +150,7 @@ func main() {
 이 작업을 완료하려면 `PlayerStore`를 구현해야 하므로 구현해야 하는 메서드를 호출하는 스토어에 대한 테스트를 작성합니다. `GetLeague`부터 시작합니다.
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 func TestFileSystemStore(t *testing.T) {
 
 	t.Run("league from a reader", func(t *testing.T) {
@@ -178,7 +178,7 @@ func TestFileSystemStore(t *testing.T) {
 
 ```
 # github.com/quii/learn-go-with-tests/io/v1
-./file*system*store_test.go:15:12: undefined: FileSystemPlayerStore
+./file_system_store_test.go:15:12: undefined: FileSystemPlayerStore
 ```
 
 ## 테스트를 실행하고 실패하는 테스트 출력을 확인하기 위한 최소한의 코드 작성
@@ -186,7 +186,7 @@ func TestFileSystemStore(t *testing.T) {
 새 파일에 `FileSystemPlayerStore`를 정의합시다
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct{}
 ```
 
@@ -194,14 +194,14 @@ type FileSystemPlayerStore struct{}
 
 ```
 # github.com/quii/learn-go-with-tests/io/v1
-./file*system*store_test.go:15:28: too many values in struct initializer
-./file*system*store_test.go:17:15: store.GetLeague undefined (type FileSystemPlayerStore has no field or method GetLeague)
+./file_system_store_test.go:15:28: too many values in struct initializer
+./file_system_store_test.go:17:15: store.GetLeague undefined (type FileSystemPlayerStore has no field or method GetLeague)
 ```
 
 `Reader`를 전달하고 있지만 예상하지 않고 아직 `GetLeague`가 정의되지 않아서 불평합니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database io.Reader
 }
@@ -214,9 +214,9 @@ func (f *FileSystemPlayerStore) GetLeague() []Player {
 한 번 더...
 
 ```
-=== RUN   TestFileSystemStore//league*from*a_reader
-    --- FAIL: TestFileSystemStore//league*from*a_reader (0.00s)
-        file*system*store_test.go:24: got [] want [{Cleo 10} {Chris 33}]
+=== RUN   TestFileSystemStore//league_from_a_reader
+    --- FAIL: TestFileSystemStore//league_from_a_reader (0.00s)
+        file_system_store_test.go:24: got [] want [{Cleo 10} {Chris 33}]
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -224,7 +224,7 @@ func (f *FileSystemPlayerStore) GetLeague() []Player {
 이전에 reader에서 JSON을 읽었습니다
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetLeague() []Player {
 	var league []Player
 	json.NewDecoder(f.database).Decode(&league)
@@ -258,7 +258,7 @@ func NewLeague(rdr io.Reader) ([]Player, error) {
 구현과 `server_test.go`의 테스트 헬퍼 `getLeagueFromResponse`에서 이것을 호출합니다
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetLeague() []Player {
 	league, _ := NewLeague(f.database)
 	return league
@@ -282,7 +282,7 @@ type Reader interface {
 현재 테스트의 끝에 다음을 추가합니다.
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 
 // 다시 읽기
 got = store.GetLeague()
@@ -313,7 +313,7 @@ type Seeker interface {
 좋은 것 같습니다. `FileSystemPlayerStore`를 이 인터페이스를 대신 받도록 변경할 수 있을까요?
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database io.ReadSeeker
 }
@@ -332,7 +332,7 @@ func (f *FileSystemPlayerStore) GetLeague() []Player {
 ## 먼저 테스트 작성
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("get player score", func(t *testing.T) {
 	database := strings.NewReader(`[
 		{"Name": "Cleo", "Wins": 10},
@@ -353,7 +353,7 @@ t.Run("get player score", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-./file*system*store_test.go:38:15: store.GetPlayerScore undefined (type FileSystemPlayerStore has no field or method GetPlayerScore)
+./file_system_store_test.go:38:15: store.GetPlayerScore undefined (type FileSystemPlayerStore has no field or method GetPlayerScore)
 ```
 
 ## 테스트를 실행하고 실패하는 테스트 출력을 확인하기 위한 최소한의 코드 작성
@@ -361,7 +361,7 @@ t.Run("get player score", func(t *testing.T) {
 테스트를 컴파일하려면 새 타입에 메서드를 추가해야 합니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 	return 0
 }
@@ -370,9 +370,9 @@ func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 이제 컴파일되고 테스트가 실패합니다
 
 ```
-=== RUN   TestFileSystemStore/get*player*score
-    --- FAIL: TestFileSystemStore//get*player*score (0.00s)
-        file*system*store_test.go:43: got 0 want 33
+=== RUN   TestFileSystemStore/get_player_score
+    --- FAIL: TestFileSystemStore//get_player_score (0.00s)
+        file_system_store_test.go:43: got 0 want 33
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -380,7 +380,7 @@ func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 리그를 반복하여 플레이어를 찾고 점수를 반환할 수 있습니다
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 
 	var wins int
@@ -401,7 +401,7 @@ func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 수십 개의 테스트 헬퍼 리팩토링을 보았으므로 작동하도록 남겨둡니다
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("get player score", func(t *testing.T) {
 	database := strings.NewReader(`[
 		{"Name": "Cleo", "Wins": 10},
@@ -426,7 +426,7 @@ t.Run("get player score", func(t *testing.T) {
 타입을 업데이트합시다
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database io.ReadWriteSeeker
 }
@@ -435,9 +435,9 @@ type FileSystemPlayerStore struct {
 컴파일되는지 확인
 
 ```
-./file*system*store_test.go:15:34: cannot use database (type *strings.Reader) as type io.ReadWriteSeeker in field value:
+./file_system_store_test.go:15:34: cannot use database (type *strings.Reader) as type io.ReadWriteSeeker in field value:
     *strings.Reader does not implement io.ReadWriteSeeker (missing Write method)
-./file*system*store_test.go:36:34: cannot use database (type *strings.Reader) as type io.ReadWriteSeeker in field value:
+./file_system_store_test.go:36:34: cannot use database (type *strings.Reader) as type io.ReadWriteSeeker in field value:
     *strings.Reader does not implement io.ReadWriteSeeker (missing Write method)
 ```
 
@@ -455,7 +455,7 @@ type FileSystemPlayerStore struct {
 임시 파일을 만들고 일부 데이터를 안에 넣는 헬퍼 함수를 만들고 점수 테스트를 추상화합시다
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 func createTempFile(t testing.TB, initialData string) (io.ReadWriteSeeker, func()) {
 	t.Helper()
 
@@ -488,7 +488,7 @@ func assertScoreEquals(t testing.TB, got, want int) {
 `ReadWriteSeeker`(파일)뿐만 아니라 함수도 반환한다는 것을 알 수 있습니다. 테스트가 완료된 후 파일이 제거되도록 해야 합니다. 오류가 발생하기 쉽고 독자에게 흥미롭지 않으므로 파일의 세부 정보를 테스트에 노출하고 싶지 않습니다. `removeFile` 함수를 반환함으로써 헬퍼에서 세부 정보를 처리하고 호출자가 해야 할 일은 `defer cleanDatabase()`를 실행하는 것입니다.
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 func TestFileSystemStore(t *testing.T) {
 
 	t.Run("league from a reader", func(t *testing.T) {
@@ -533,7 +533,7 @@ func TestFileSystemStore(t *testing.T) {
 기존 플레이어에 대한 승리 기록의 첫 번째 반복을 얻어봅시다
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("store wins for existing players", func(t *testing.T) {
 	database, cleanDatabase := createTempFile(t, `[
 		{"Name": "Cleo", "Wins": 10},
@@ -552,23 +552,23 @@ t.Run("store wins for existing players", func(t *testing.T) {
 
 ## 테스트 실행 시도
 
-`./file*system*store_test.go:67:8: store.RecordWin undefined (type FileSystemPlayerStore has no field or method RecordWin)`
+`./file_system_store_test.go:67:8: store.RecordWin undefined (type FileSystemPlayerStore has no field or method RecordWin)`
 
 ## 테스트를 실행하고 실패하는 테스트 출력을 확인하기 위한 최소한의 코드 작성
 
 새 메서드 추가
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) RecordWin(name string) {
 
 }
 ```
 
 ```
-=== RUN   TestFileSystemStore/store*wins*for*existing*players
-    --- FAIL: TestFileSystemStore/store*wins*for*existing*players (0.00s)
-        file*system*store_test.go:71: got 33 want 34
+=== RUN   TestFileSystemStore/store_wins_for_existing_players
+    --- FAIL: TestFileSystemStore/store_wins_for_existing_players (0.00s)
+        file_system_store_test.go:71: got 33 want 34
 ```
 
 구현이 비어 있으므로 이전 점수가 반환됩니다.
@@ -576,7 +576,7 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 ## 테스트를 통과시키기 위한 충분한 코드 작성
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) RecordWin(name string) {
 	league := f.GetLeague()
 
@@ -623,10 +623,10 @@ func (l League) Find(name string) *Player {
 
 `[]Player` 대신 `League`를 반환하도록 `PlayerStore` 인터페이스를 변경합니다. 테스트를 다시 실행해 보면 인터페이스를 변경했기 때문에 컴파일 문제가 발생하지만 수정하기 매우 쉽습니다; `[]Player`에서 `League`로 반환 타입을 변경하면 됩니다.
 
-이렇게 하면 `file*system*store`의 메서드를 단순화할 수 있습니다.
+이렇게 하면 `file_system_store`의 메서드를 단순화할 수 있습니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetPlayerScore(name string) int {
 
 	player := f.GetLeague().Find(name)
@@ -658,7 +658,7 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 ## 먼저 테스트 작성
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("store wins for new players", func(t *testing.T) {
 	database, cleanDatabase := createTempFile(t, `[
 		{"Name": "Cleo", "Wins": 10},
@@ -678,9 +678,9 @@ t.Run("store wins for new players", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestFileSystemStore/store*wins*for*new*players#01
-    --- FAIL: TestFileSystemStore/store*wins*for*new*players#01 (0.00s)
-        file*system*store_test.go:86: got 0 want 1
+=== RUN   TestFileSystemStore/store_wins_for_new_players#01
+    --- FAIL: TestFileSystemStore/store_wins_for_new_players#01 (0.00s)
+        file_system_store_test.go:86: got 0 want 1
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -688,7 +688,7 @@ t.Run("store wins for new players", func(t *testing.T) {
 플레이어를 찾을 수 없어서 `Find`가 `nil`을 반환하는 시나리오를 처리하면 됩니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) RecordWin(name string) {
 	league := f.GetLeague()
 	player := league.Find(name)
@@ -709,7 +709,7 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 `TestRecordingWinsAndRetrievingThem`에서 이전 스토어를 교체합니다.
 
 ```go
-//server*integration*test.go
+//server_integration_test.go
 database, cleanDatabase := createTempFile(t, "")
 defer cleanDatabase()
 store := &FileSystemPlayerStore{database}
@@ -730,7 +730,7 @@ import (
 const dbFileName = "game.db.json"
 
 func main() {
-	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -746,7 +746,7 @@ func main() {
 ```
 
 - 데이터베이스용 파일을 만듭니다.
-- `os.OpenFile`의 두 번째 인수는 파일을 열기 위한 권한을 정의할 수 있습니다, 우리의 경우 `O*RDWR`은 읽고 쓰기를 원한다는 것을 의미하고 *그리고_ `os.O_CREATE`는 존재하지 않으면 파일을 만든다는 것을 의미합니다.
+- `os.OpenFile`의 두 번째 인수는 파일을 열기 위한 권한을 정의할 수 있습니다, 우리의 경우 `O_RDWR`은 읽고 쓰기를 원한다는 것을 의미하고 *그리고_ `os.O_CREATE`는 존재하지 않으면 파일을 만든다는 것을 의미합니다.
 - 세 번째 인수는 파일에 대한 권한을 설정합니다, 우리의 경우 모든 사용자가 파일을 읽고 쓸 수 있습니다. [(더 자세한 설명은 superuser.com 참조)](https://superuser.com/questions/295591/what-is-the-meaning-of-chmod-666).
 
 이제 프로그램을 실행하면 재시작 사이에 데이터가 파일에 유지됩니다, 만세!
@@ -758,7 +758,7 @@ func main() {
 이 초기화 중 일부를 수행하고 읽기에서 사용할 `FileSystemStore`에 값으로 리그를 저장할 수 있는 생성자를 만들 수 있습니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database io.ReadWriteSeeker
 	league   League
@@ -777,7 +777,7 @@ func NewFileSystemPlayerStore(database io.ReadWriteSeeker) *FileSystemPlayerStor
 이렇게 하면 디스크에서 한 번만 읽으면 됩니다. 이제 디스크에서 리그를 가져오는 모든 이전 호출을 대신 `f.league`를 사용하여 교체할 수 있습니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func (f *FileSystemPlayerStore) GetLeague() League {
 	return f.league
 }
@@ -840,7 +840,7 @@ func (t *tape) Write(p []byte) (n int, err error) {
 `Seek` 부분을 캡슐화하므로 이제 `Write`만 구현하고 있습니다. 이것은 `FileSystemStore`가 이제 `Writer`에 대한 참조만 가질 수 있다는 것을 의미합니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database io.Writer
 	league   League
@@ -850,7 +850,7 @@ type FileSystemPlayerStore struct {
 `Tape`를 사용하도록 생성자 업데이트
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func NewFileSystemPlayerStore(database io.ReadWriteSeeker) *FileSystemPlayerStore {
 	database.Seek(0, io.SeekStart)
 	league, _ := NewLeague(database)
@@ -934,7 +934,7 @@ func (t *tape) Write(p []byte) (n int, err error) {
 타입에 `Encoder`에 대한 참조를 저장하고 생성자에서 초기화:
 
 ```go
-//file*system*store.go
+//file_system_store.go
 type FileSystemPlayerStore struct {
 	database *json.Encoder
 	league   League
@@ -1009,7 +1009,7 @@ type ReadWriteSeekTruncate interface {
 생성자가 에러를 반환할 수 있도록 합시다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 	file.Seek(0, io.SeekStart)
 	league, err := NewLeague(file)
@@ -1041,11 +1041,11 @@ if err != nil {
 
 ```
 ./main.go:18:35: multiple-value NewFileSystemPlayerStore() in single-value context
-./file*system*store_test.go:35:36: multiple-value NewFileSystemPlayerStore() in single-value context
-./file*system*store_test.go:57:36: multiple-value NewFileSystemPlayerStore() in single-value context
-./file*system*store_test.go:70:36: multiple-value NewFileSystemPlayerStore() in single-value context
-./file*system*store_test.go:85:36: multiple-value NewFileSystemPlayerStore() in single-value context
-./server*integration*test.go:12:35: multiple-value NewFileSystemPlayerStore() in single-value context
+./file_system_store_test.go:35:36: multiple-value NewFileSystemPlayerStore() in single-value context
+./file_system_store_test.go:57:36: multiple-value NewFileSystemPlayerStore() in single-value context
+./file_system_store_test.go:70:36: multiple-value NewFileSystemPlayerStore() in single-value context
+./file_system_store_test.go:85:36: multiple-value NewFileSystemPlayerStore() in single-value context
+./server_integration_test.go:12:35: multiple-value NewFileSystemPlayerStore() in single-value context
 ```
 
 main에서 에러를 출력하고 프로그램을 종료하고 싶습니다.
@@ -1062,7 +1062,7 @@ if err != nil {
 테스트에서 에러가 없다고 어설션해야 합니다. 이를 돕는 헬퍼를 만들 수 있습니다.
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 func assertNoError(t testing.TB, err error) {
 	t.Helper()
 	if err != nil {
@@ -1076,7 +1076,7 @@ func assertNoError(t testing.TB, err error) {
 ```
 === RUN   TestRecordingWinsAndRetrievingThem
 --- FAIL: TestRecordingWinsAndRetrievingThem (0.00s)
-    server*integration*test.go:14: didn't expect an error but got one, problem loading player store from file /var/folders/nj/r_ccbj5d7flds0sf63yy4vb80000gn/T/db841037437, problem parsing league, EOF
+    server_integration_test.go:14: didn't expect an error but got one, problem loading player store from file /var/folders/nj/r_ccbj5d7flds0sf63yy4vb80000gn/T/db841037437, problem parsing league, EOF
 ```
 
 파일이 비어 있어서 리그를 파싱할 수 없습니다. 에러를 항상 무시했기 때문에 이전에는 에러가 발생하지 않았습니다.
@@ -1084,7 +1084,7 @@ func assertNoError(t testing.TB, err error) {
 유효한 JSON을 넣어 큰 통합 테스트를 수정합시다:
 
 ```go
-//server*integration*test.go
+//server_integration_test.go
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 	database, cleanDatabase := createTempFile(t, `[]`)
 	//etc...
@@ -1096,7 +1096,7 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 ## 먼저 테스트 작성
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("works with an empty file", func(t *testing.T) {
 	database, cleanDatabase := createTempFile(t, "")
 	defer cleanDatabase()
@@ -1110,9 +1110,9 @@ t.Run("works with an empty file", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestFileSystemStore/works*with*an*empty*file
-    --- FAIL: TestFileSystemStore/works*with*an*empty*file (0.00s)
-        file*system*store*test.go:108: didn't expect an error but got one, problem loading player store from file /var/folders/nj/r*ccbj5d7flds0sf63yy4vb80000gn/T/db019548018, problem parsing league, EOF
+=== RUN   TestFileSystemStore/works_with_an_empty_file
+    --- FAIL: TestFileSystemStore/works_with_an_empty_file (0.00s)
+        file_system_store_test.go:108: didn't expect an error but got one, problem loading player store from file /var/folders/nj/r_ccbj5d7flds0sf63yy4vb80000gn/T/db019548018, problem parsing league, EOF
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
@@ -1120,7 +1120,7 @@ t.Run("works with an empty file", func(t *testing.T) {
 생성자를 다음으로 변경
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 
 	file.Seek(0, io.SeekStart)
@@ -1156,7 +1156,7 @@ func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 생성자가 이제 좀 지저분하므로 초기화 코드를 함수로 추출합시다:
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func initialisePlayerDBFile(file *os.File) error {
 	file.Seek(0, io.SeekStart)
 
@@ -1176,7 +1176,7 @@ func initialisePlayerDBFile(file *os.File) error {
 ```
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 
 	err := initialisePlayerDBFile(file)
@@ -1209,7 +1209,7 @@ func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
 `TestFileSystemStore`의 첫 번째 테스트에서 어설션을 업데이트할 수 있습니다:
 
 ```go
-//file*system*store_test.go
+//file_system_store_test.go
 t.Run("league sorted", func(t *testing.T) {
 	database, cleanDatabase := createTempFile(t, `[
 		{"Name": "Cleo", "Wins": 10},
@@ -1240,10 +1240,10 @@ t.Run("league sorted", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestFileSystemStore/league*from*a*reader,*sorted
-    --- FAIL: TestFileSystemStore/league*from*a*reader,*sorted (0.00s)
-        file*system*store_test.go:46: got [{Cleo 10} {Chris 33}] want [{Chris 33} {Cleo 10}]
-        file*system*store_test.go:51: got [{Cleo 10} {Chris 33}] want [{Chris 33} {Cleo 10}]
+=== RUN   TestFileSystemStore/league_from_a_reader,_sorted
+    --- FAIL: TestFileSystemStore/league_from_a_reader,_sorted (0.00s)
+        file_system_store_test.go:46: got [{Cleo 10} {Chris 33}] want [{Chris 33} {Cleo 10}]
+        file_system_store_test.go:51: got [{Cleo 10} {Chris 33}] want [{Chris 33} {Cleo 10}]
 ```
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성

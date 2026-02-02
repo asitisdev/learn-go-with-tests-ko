@@ -2,7 +2,7 @@
 
 **[이 챕터의 모든 코드는 여기에서 확인할 수 있습니다](https://github.com/quii/learn-go-with-tests/tree/main/blogrenderer)**
 
-우리는 모든 사람이 기가바이트의 트랜스파일된 JavaScript 위에 구축된 이달의 최신 프론트엔드 프레임워크로 웹 애플리케이션을 구축하고 싶어하는 세상에 살고 있습니다. 비잔틴식 빌드 시스템으로 작업하지만; [그것이 항상 필요한 것은 아닐 수 있습니다](https://quii.dev/The*Web*I_Want).
+우리는 모든 사람이 기가바이트의 트랜스파일된 JavaScript 위에 구축된 이달의 최신 프론트엔드 프레임워크로 웹 애플리케이션을 구축하고 싶어하는 세상에 살고 있습니다. 비잔틴식 빌드 시스템으로 작업하지만; [그것이 항상 필요한 것은 아닐 수 있습니다](https://quii.dev/The_Web_I_Want).
 
 대부분의 Go 개발자는 간단하고 안정적이며 빠른 도구 체인을 중요시하지만 프론트엔드 세계는 종종 이 측면에서 실패합니다.
 
@@ -186,7 +186,7 @@ Tags: <ul><li>go</li><li>tdd</li></ul>`
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it*converts*a*single*post*into*HTML
+=== RUN   TestRender/it_converts_a_single_post_into_HTML
     renderer_test.go:32: got '<h1>hello world</h1><p>This is a description</p><ul><li>go</li><li>tdd</li></ul>' want '<h1>hello world</h1>
         <p>This is a description</p>
         Tags: <ul><li>go</li><li></li></ul>'
@@ -397,14 +397,14 @@ func TestRender(t *testing.T) {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it*converts*a*single*post*into*HTML
+=== RUN   TestRender/it_converts_a_single_post_into_HTML
     renderer_test.go:29: Failed Approval: received does not match approved.
 ```
 
 두 개의 파일이 생성됩니다
 
-- `renderer*test.TestRender.it*converts*a*single*post*into_HTML.received.txt`
-- `renderer*test.TestRender.it*converts*a*single*post*into_HTML.approved.txt`
+- `renderer_test.TestRender.it_converts_a_single_post_into_HTML.received.txt`
+- `renderer_test.TestRender.it_converts_a_single_post_into_HTML.approved.txt`
 
 received 파일에는 새로운 승인되지 않은 버전의 출력이 있습니다. 그것을 빈 approved 파일에 복사하고 테스트를 다시 실행합니다.
 
@@ -720,7 +720,7 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it*renders*an*index*of_posts
+=== RUN   TestRender/it_renders_an_index_of_posts
     renderer_test.go:49: got "" want "<ol><li><a href=\"/post/hello-world\">Hello World</a></li><li><a href=\"/post/hello-world-2\">Hello World 2</a></li></ol>"
 --- FAIL: TestRender (0.00s)
 ```
@@ -752,7 +752,7 @@ func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
 
 ```
 === RUN   TestRender
-=== RUN   TestRender/it*renders*an*index*of_posts
+=== RUN   TestRender/it_renders_an_index_of_posts
     renderer_test.go:49: got "<ol><li><a href=\"/post/Hello%20World\">Hello World</a></li><li><a href=\"/post/Hello%20World%202\">Hello World 2</a></li></ol>" want "<ol><li><a href=\"/post/hello-world\">Hello World</a></li><li><a href=\"/post/hello-world-2\">Hello World 2</a></li></ol>"
 --- FAIL: TestRender (0.00s)
     --- FAIL: TestRender/it*renders*an*index*of_posts (0.00s)
@@ -1006,7 +1006,7 @@ Go는 웹 개발에 훌륭합니다. 특히 만드는 웹사이트의 실제 요
 ### 배운 것
 
 - HTML 템플릿을 만들고 렌더링하는 방법.
-- 템플릿을 함께 구성하고 관련 마크업을 [DRY](https://en.wikipedia.org/wiki/Don't*repeat*yourself)하여 일관된 모양과 느낌을 유지하는 데 도움이 되는 방법.
+- 템플릿을 함께 구성하고 관련 마크업을 [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself)하여 일관된 모양과 느낌을 유지하는 데 도움이 되는 방법.
 - 템플릿에 함수를 전달하는 방법과 왜 두 번 생각해야 하는지.
 - 템플릿 렌더러와 같은 크고 못생긴 출력을 테스트하는 데 도움이 되는 "승인 테스트"를 작성하는 방법.
 

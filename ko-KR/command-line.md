@@ -46,14 +46,14 @@ Go에서 애플리케이션을 만들려면 `package main` 안에 `main` 함수�
 
 ```
 .
-|-- file*system*store.go
-|-- file*system*store_test.go
+|-- file_system_store.go
+|-- file_system_store_test.go
 |-- cmd
 |   |-- webserver
 |       |-- main.go
 |-- league.go
 |-- server.go
-|-- server*integration*test.go
+|-- server_integration_test.go
 |-- server_test.go
 |-- tape.go
 |-- tape_test.go
@@ -81,7 +81,7 @@ import (
 const dbFileName = "game.db.json"
 
 func main() {
-	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -286,7 +286,7 @@ func assertPlayerWin(t testing.TB, store *StubPlayerStore, winner string) {
 }
 ```
 
-이제 `server*test.go`와 `CLI*test.go` 모두에서 어설션을 교체합니다.
+이제 `server_test.go`와 `CLI_test.go` 모두에서 어설션을 교체합니다.
 
 테스트는 이제 다음과 같이 읽혀야 합니다
 
@@ -339,10 +339,10 @@ func TestCLI(t *testing.T) {
 ```
 === RUN   TestCLI
 --- FAIL: TestCLI (0.00s)
-=== RUN   TestCLI/record*chris*win*from*user_input
-    --- PASS: TestCLI/record*chris*win*from*user_input (0.00s)
-=== RUN   TestCLI/record*cleo*win*from*user_input
-    --- FAIL: TestCLI/record*cleo*win*from*user_input (0.00s)
+=== RUN   TestCLI/record_chris_win_from_user_input
+    --- PASS: TestCLI/record_chris_win_from_user_input (0.00s)
+=== RUN   TestCLI/record_cleo_win_from_user_input
+    --- FAIL: TestCLI/record_cleo_win_from_user_input (0.00s)
         CLI_test.go:27: did not store correct winner got 'Chris' want 'Cleo'
 FAIL
 ```
@@ -398,7 +398,7 @@ func main() {
 	fmt.Println("Let's play poker")
 	fmt.Println("Type {Name} wins to record a win")
 
-	db, err := os.OpenFile(dbFileName, os.O*RDWR|os.O*CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
@@ -440,7 +440,7 @@ command-line/v3/cmd/cli/main.go:32:34: implicit assignment of unexported field '
 
 TDD의 격언은 코드를 테스트할 수 없으면 코드 사용자가 통합하기 어려울 것이라는 것입니다. `package foo_test`를 사용하면 패키지 사용자가 가져오는 것처럼 코드를 테스트하도록 강제하여 도움이 됩니다.
 
-`main` 수정 전에 `CLI*test.go` 안의 테스트 패키지를 `poker*test`로 변경합시다.
+`main` 수정 전에 `CLI_test.go` 안의 테스트 패키지를 `poker_test`로 변경합시다.
 
 잘 구성된 IDE가 있으면 갑자기 많은 빨간색이 표시될 것입니다! 컴파일러를 실행하면 다음 에러가 발생합니다
 
@@ -451,7 +451,7 @@ TDD의 격언은 코드를 테스트할 수 없으면 코드 사용자가 통합
 ./CLI_test.go:27:3: undefined: assertPlayerWin
 ```
 
-이제 패키지 설계에 대한 더 많은 질문에 부딪혔습니다. 소프트웨어를 테스트하기 위해 내보내지지 않은 스텁과 헬퍼 함수를 만들었는데 헬퍼가 `poker` 패키지의 `*test.go` 파일에 정의되어 있기 때문에 더 이상 `CLI*test`에서 사용할 수 없습니다.
+이제 패키지 설계에 대한 더 많은 질문에 부딪혔습니다. 소프트웨어를 테스트하기 위해 내보내지지 않은 스텁과 헬퍼 함수를 만들었는데 헬퍼가 `poker` 패키지의 `_test.go` 파일에 정의되어 있기 때문에 더 이상 `CLI_test`에서 사용할 수 없습니다.
 
 #### 스텁과 헬퍼를 '공개'하기를 원하나요?
 
@@ -592,12 +592,12 @@ game := poker.NewCLI(store, os.Stdin)
 
 ### 리팩토링
 
-파일을 열고 그 내용에서 `file*system*store`를 만드는 각 애플리케이션에서 반복이 있습니다. 이것은 패키지 설계의 약간의 약점처럼 느껴지므로 경로에서 파일을 열고 `PlayerStore`를 반환하는 기능을 캡슐화하도록 만들어야 합니다.
+파일을 열고 그 내용에서 `file_system_store`를 만드는 각 애플리케이션에서 반복이 있습니다. 이것은 패키지 설계의 약간의 약점처럼 느껴지므로 경로에서 파일을 열고 `PlayerStore`를 반환하는 기능을 캡슐화하도록 만들어야 합니다.
 
 ```go
-//file*system*store.go
+//file_system_store.go
 func FileSystemPlayerStoreFromFile(path string) (*FileSystemPlayerStore, func(), error) {
-	db, err := os.OpenFile(path, os.O*RDWR|os.O*CREATE, 0666)
+	db, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
 		return nil, nil, fmt.Errorf("problem opening %s %v", path, err)

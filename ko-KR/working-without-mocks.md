@@ -473,7 +473,7 @@ failingAPI1.UpdateCustomerFunc = func(ctx context.Context, id string, name strin
 
 ### 이 추가 코드는 낭비가 아닌가요?
 
-고객에게 서비스를 제공하는 코드만 작성하고 효율적으로 구축할 수 있는 시스템을 기대해야 한다고 믿는 것은 희망적인 생각입니다. 사람들은 낭비가 무엇인지에 대해 매우 왜곡된 의견을 가지고 있습니다(제 게시물 참조: [헨리 포드의 유령이 개발팀을 망치고 있습니다](https://quii.dev/The*ghost*of*Henry*Ford*is*ruining*your*development_team)).
+고객에게 서비스를 제공하는 코드만 작성하고 효율적으로 구축할 수 있는 시스템을 기대해야 한다고 믿는 것은 희망적인 생각입니다. 사람들은 낭비가 무엇인지에 대해 매우 왜곡된 의견을 가지고 있습니다(제 게시물 참조: [헨리 포드의 유령이 개발팀을 망치고 있습니다](https://quii.dev/The_ghost_of_Henry_Ford_is_ruining_your_development_team)).
 
 자동화된 테스트는 고객에게 직접적인 이점을 주지 않지만 작업을 더 효율적으로 만들기 위해 작성합니다(커버리지 점수를 쫓기 위해 테스트를 작성하지 않죠, 맞죠?).
 
@@ -489,7 +489,7 @@ failingAPI1.UpdateCustomerFunc = func(ctx context.Context, id string, name strin
 
 계약으로 *시작*하는 것을 권장하지 않습니다; 그것은 상향식 설계인데, 일반적으로 더 영리해야 하고 가상의 요구 사항을 과도하게 생각할 위험이 있습니다.
 
-이 기법은 이전 챕터, [TDD의 왜](https://quii.dev/The*Why*of_TDD) 및 [GOOS](http://www.growing-object-oriented-software.com)에서 논의한 "인수 테스트 주도 접근 방식"과 호환됩니다
+이 기법은 이전 챕터, [TDD의 왜](https://quii.dev/The_Why_of_TDD) 및 [GOOS](http://www.growing-object-oriented-software.com)에서 논의한 "인수 테스트 주도 접근 방식"과 호환됩니다
 
 - 실패하는 [인수 테스트](https://quii.gitbook.io/learn-go-with-tests/testing-fundamentals/scaling-acceptance-tests)를 작성합니다.
 - 통과시키기에 충분한 코드를 작성합니다. 일반적으로 API, 데이터베이스 또는 무엇이든에 의존하는 일부 "서비스 레이어"가 됩니다. 일반적으로 인터페이스를 통해 외부 관심사(예: 지속성, 데이터베이스 호출 등)에서 분리된 비즈니스 로직 코드가 있습니다.

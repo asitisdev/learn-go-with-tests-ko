@@ -65,9 +65,9 @@ func (c *Counter) Value() int {
 
 ```
 === RUN   TestCounter
-=== RUN   TestCounter/incrementing*the*counter*3*times*leaves*it*at*3
+=== RUN   TestCounter/incrementing_the_counter_3_times_leaves_it_at_3
 --- FAIL: TestCounter (0.00s)
-    --- FAIL: TestCounter/incrementing*the*counter*3*times*leaves*it*at*3 (0.00s)
+    --- FAIL: TestCounter/incrementing_the_counter_3_times_leaves_it_at_3 (0.00s)
     	sync_test.go:27: got 0, want 3
 ```
 
@@ -149,9 +149,9 @@ t.Run("it runs safely concurrently", func(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestCounter/it*runs*safely*in*a*concurrent*envionment
+=== RUN   TestCounter/it_runs_safely_in_a_concurrent_envionment
 --- FAIL: TestCounter (0.00s)
-    --- FAIL: TestCounter/it*runs*safely*in*a*concurrent*envionment (0.00s)
+    --- FAIL: TestCounter/it_runs_safely_in_a_concurrent_envionment (0.00s)
     	sync_test.go:26: got 939, want 1000
 FAIL
 ```

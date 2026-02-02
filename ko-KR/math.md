@@ -225,7 +225,7 @@ func TestSecondHandAt30Seconds(t *testing.T) {
 
 ![picture of the unit circle with the x and y elements of a ray defined as cos(a) and sin(a) respectively, where a is the angle made by the ray with the x axis](<.gitbook/assets/unit_circle_params (1).png>)
 
-(이것을 믿지 않는다면, [위키피디아를 보세요...](https://en.wikipedia.org/wiki/Sine#Unit*circle*definition))
+(이것을 믿지 않는다면, [위키피디아를 보세요...](https://en.wikipedia.org/wiki/Sine#Unit_circle_definition))
 
 마지막 꼬임 하나 - X 축(3시)이 아닌 12시부터 각도를 측정하고 싶기 때문에 축을 바꿔야 합니다; 이제 x = sin(a)이고 y = cos(a)입니다.
 
@@ -251,9 +251,9 @@ func TestSecondHandAt30Seconds(t *testing.T) {
 
 ### 패키지에 대한 요약
 
-현재 인수 테스트는 `clockface*test` 패키지에 있습니다. 테스트는 `clockface` 패키지 외부에 있을 수 있습니다 - 이름이 `*test.go`로 끝나기만 하면 실행할 수 있습니다.
+현재 인수 테스트는 `clockface_test` 패키지에 있습니다. 테스트는 `clockface` 패키지 외부에 있을 수 있습니다 - 이름이 `_test.go`로 끝나기만 하면 실행할 수 있습니다.
 
-이 라디안 테스트를 `clockface` 패키지 *내에서* 작성하겠습니다; 내보내지 않을 수 있고, 무슨 일이 일어나는지 더 잘 이해하면 삭제(또는 이동)될 수 있습니다. 인수 테스트 파일의 이름을 `clockface*acceptance*test.go`로 변경하여 초를 라디안으로 테스트할 `clockface*test`라는 *새_ 파일을 만들 수 있습니다.
+이 라디안 테스트를 `clockface` 패키지 *내에서* 작성하겠습니다; 내보내지 않을 수 있고, 무슨 일이 일어나는지 더 잘 이해하면 삭제(또는 이동)될 수 있습니다. 인수 테스트 파일의 이름을 `clockface_acceptance_test.go`로 변경하여 초를 라디안으로 테스트할 `clockface_test`라는 *새* 파일을 만들 수 있습니다.
 
 ```go
 package clockface
@@ -662,7 +662,7 @@ func TestSecondHandAt30Seconds(t *testing.T) {
 ### 테스트 실행 시도
 
 ```
-clockface*acceptance*test.go:28: Got {150 60}, wanted {150 240}
+clockface_acceptance_test.go:28: Got {150 60}, wanted {150 240}
 ```
 
 ### 테스트를 통과시키기 위한 충분한 코드 작성
@@ -726,7 +726,7 @@ func SecondHand(t time.Time) Point {
 |-- clockface
 |       |-- main.go
 |-- clockface.go
-|-- clockface*acceptance*test.go
+|-- clockface_acceptance_test.go
 |-- clockface_test.go
 ```
 
@@ -860,7 +860,7 @@ type Svg struct {
 }
 ```
 
-필요하다면 이것을 조정할 수 있지만 (구조체 이름을 `SVG`로 변경하는 것처럼) 시작하기에 충분히 좋습니다. 구조체를 `clockface*acceptance*test` 파일에 붙여 넣고 테스트를 작성합시다:
+필요하다면 이것을 조정할 수 있지만 (구조체 이름을 `SVG`로 변경하는 것처럼) 시작하기에 충분히 좋습니다. 구조체를 `clockface_acceptance_test` 파일에 붙여 넣고 테스트를 작성합시다:
 
 ```go
 func TestSVGWriterAtMidnight(t *testing.T) {
@@ -888,7 +888,7 @@ func TestSVGWriterAtMidnight(t *testing.T) {
 `clockface.SVGWriter`의 출력을 `bytes.Buffer`에 쓴 다음 `Svg`로 `Unmarshal`합니다. 그런 다음 `Svg`의 각 `Line`을 확인하여 예상된 `X2` 및 `Y2` 값을 가진 것이 있는지 확인합니다. 일치하면 일찍 반환합니다 (테스트 통과); 그렇지 않으면 (희망적으로) 유익한 메시지와 함께 실패합니다.
 
 ```sh
-./clockface*acceptance*test.go:41:2: undefined: clockface.SVGWriter
+./clockface_acceptance_test.go:41:2: undefined: clockface.SVGWriter
 ```
 
 `SVGWriter.go`를 만들어야 할 것 같습니다...
@@ -940,7 +940,7 @@ const svgEnd = `</svg>`
 가장 아름다운 SVG writer? 아니오. 하지만 작업을 수행할 것입니다...
 
 ```
-clockface*acceptance*test.go:56: Expected to find the second hand with x2 of 150 and y2 of 60, in the SVG output <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+clockface_acceptance_test.go:56: Expected to find the second hand with x2 of 150 and y2 of 60, in the SVG output <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
     <svg xmlns="http://www.w3.org/2000/svg"
          width="100%"
@@ -1141,7 +1141,7 @@ func TestSVGWriterMinuteHand(t *testing.T) {
 ### 테스트 실행 시도
 
 ```
-clockface*acceptance*test.go:87: Expected to find the minute hand line {X1:150 Y1:150 X2:150 Y2:70}, in the SVG lines [{X1:150 Y1:150 X2:150 Y2:60}]
+clockface_acceptance_test.go:87: Expected to find the minute hand line {X1:150 Y1:150 X2:150 Y2:70}, in the SVG lines [{X1:150 Y1:150 X2:150 Y2:60}]
 ```
 
 다른 시계 바늘을 구축하기 시작해야 합니다. 초침에 대한 테스트를 생성한 것과 같은 방식으로 다음 테스트 세트를 생성하기 위해 반복할 수 있습니다. 다시 한번 작동하는 동안 인수 테스트를 주석 처리하겠습니다:
@@ -1249,7 +1249,7 @@ PASS
 ok  	clockface	0.007s
 ```
 
-멋지고 쉽습니다. [지금 상태는 이렇습니다](https://github.com/quii/learn-go-with-tests/tree/main/math/v8/clockface/clockface*acceptance*test.go)
+멋지고 쉽습니다. [지금 상태는 이렇습니다](https://github.com/quii/learn-go-with-tests/tree/main/math/v8/clockface/clockface_acceptance_test.go)
 
 ### 새 요구 사항에 대해 반복
 
@@ -1501,7 +1501,7 @@ func TestSVGWriterHourHand(t *testing.T) {
 ### 테스트 실행 시도
 
 ```
-clockface*acceptance*test.go:113: Expected to find the hour hand line {X1:150 Y1:150 X2:150 Y2:200}, in the SVG lines [{X1:150 Y1:150 X2:150 Y2:60} {X1:150 Y1:150 X2:150 Y2:70}]
+clockface_acceptance_test.go:113: Expected to find the hour hand line {X1:150 Y1:150 X2:150 Y2:200}, in the SVG lines [{X1:150 Y1:150 X2:150 Y2:60} {X1:150 Y1:150 X2:150 Y2:70}]
 ```
 
 다시 낮은 수준의 테스트로 커버리지를 확보할 때까지 이것을 주석 처리합시다:
@@ -1814,7 +1814,7 @@ func TestSVGWriterHourHand(t *testing.T) {
 ### 테스트 실행 시도
 
 ```
-clockface*acceptance*test.go:113: Expected to find the hour hand line {X1:150 Y1:150 X2:150 Y2:200},
+clockface_acceptance_test.go:113: Expected to find the hour hand line {X1:150 Y1:150 X2:150 Y2:200},
     in the SVG lines [{X1:150 Y1:150 X2:150 Y2:60} {X1:150 Y1:150 X2:150 Y2:70}]
 ```
 

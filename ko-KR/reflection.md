@@ -200,8 +200,8 @@ func TestWalk(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/struct*with*two*string*fields
-    --- FAIL: TestWalk/struct*with*two*string*fields (0.00s)
+=== RUN   TestWalk/struct_with_two_string_fields
+    --- FAIL: TestWalk/struct_with_two_string_fields (0.00s)
         reflection_test.go:40: got [Chris], want [Chris London]
 ```
 
@@ -244,8 +244,8 @@ func walk(x interface{}, fn func(input string)) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/struct*with*non*string*field
-    --- FAIL: TestWalk/struct*with*non*string*field (0.00s)
+=== RUN   TestWalk/struct_with_non_string_field
+    --- FAIL: TestWalk/struct_with_non_string_field (0.00s)
         reflection_test.go:46: got [Chris <int Value>], want [Chris]
 ```
 
@@ -400,7 +400,7 @@ func walk(x interface{}, fn func(input string)) {
 ## 테스트 실행 시도
 
 ```
-=== RUN   TestWalk/pointers*to*things
+=== RUN   TestWalk/pointers_to_things
 panic: reflect: call of reflect.Value.NumField on ptr Value [recovered]
     panic: reflect: call of reflect.Value.NumField on ptr Value
 ```

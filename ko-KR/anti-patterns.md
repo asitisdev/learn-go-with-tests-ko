@@ -119,7 +119,7 @@ Go 속담에서 말하듯이, *인터페이스가 클수록 추상화가 약해�
 
 - 모의 객체는 때때로 도움이 되지만 매우 강력하므로 오용하기 쉽습니다. 대신 스텁을 사용하는 제약을 주세요.
 - 스파이로 구현 세부 정보를 확인하는 것은 때때로 도움이 되지만 피하려고 노력하세요. 구현 세부 정보는 일반적으로 중요하지 않으며 가능하면 테스트를 결합하고 싶지 않습니다. 테스트를 **부수적인 세부 정보가 아닌 유용한 동작**에 결합하세요.
-- 테스트 더블의 분류법이 약간 불분명하면 [테스트 더블의 이름을 올바르게 지정하는 것에 대한 게시물을 읽어보세요](https://quii.dev/Start*naming*your*test*doubles_correctly)
+- 테스트 더블의 분류법이 약간 불분명하면 [테스트 더블의 이름을 올바르게 지정하는 것에 대한 게시물을 읽어보세요](https://quii.dev/Start_naming_your_test_doubles_correctly)
 
 #### 종속성 통합
 
@@ -154,12 +154,12 @@ func NewRegistrationHandler(userStore UserStore, emailer Emailer) http.HandlerFu
 
 핸들러의 책임을 고려하여 설계를 재평가하세요:
 
-- 요청 본문을 `User`로 파싱 :white*check*mark:
+- 요청 본문을 `User`로 파싱 :white_check_mark:
 - `UserStore`를 사용하여 사용자가 존재하는지 확인 :question:
 - `UserStore`를 사용하여 사용자 저장 :question:
 - 이메일 작성 :question:
 - `Emailer`를 사용하여 이메일 전송 :question:
-- 성공, 오류 등에 따라 적절한 http 응답 반환 :white*check*mark:
+- 성공, 오류 등에 따라 적절한 http 응답 반환 :white_check_mark:
 
 이 코드를 실행하려면 다양한 정도의 테스트 더블 설정, 스파이 등으로 많은 테스트를 작성해야 합니다
 

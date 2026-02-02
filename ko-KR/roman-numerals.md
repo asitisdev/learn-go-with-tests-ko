@@ -107,8 +107,8 @@ func TestRomanNumerals(t *testing.T) {
 ## 테스트 실행 시도
 
 ```console
-=== RUN   TestRomanNumerals/2*gets*converted*to*II
-    --- FAIL: TestRomanNumerals/2*gets*converted*to*II (0.00s)
+=== RUN   TestRomanNumerals/2_gets_converted_to_II
+    --- FAIL: TestRomanNumerals/2_gets_converted_to_II (0.00s)
         numeral_test.go:20: got 'I', want 'II'
 ```
 
@@ -168,8 +168,8 @@ func TestRomanNumerals(t *testing.T) {
 ## 테스트 실행 시도
 
 ```console
-=== RUN   TestRomanNumerals/3*gets*converted*to*III
-    --- FAIL: TestRomanNumerals/3*gets*converted*to*III (0.00s)
+=== RUN   TestRomanNumerals/3_gets_converted_to_III
+    --- FAIL: TestRomanNumerals/3_gets_converted_to_III (0.00s)
         numeral_test.go:20: got 'I', want 'III'
 ```
 
@@ -233,8 +233,8 @@ func ConvertToRoman(arabic int) string {
 ## 테스트 실행 시도
 
 ```console
-=== RUN   TestRomanNumerals/4*gets*converted*to*IV_(cant*repeat*more*than*3_times)
-    --- FAIL: TestRomanNumerals/4*gets*converted*to*IV_(cant*repeat*more*than*3_times) (0.00s)
+=== RUN   TestRomanNumerals/4_gets_converted_to_IV_(cant_repeat_more_than_3_times)
+    --- FAIL: TestRomanNumerals/4_gets_converted_to_IV_(cant_repeat_more_than_3_times) (0.00s)
         numeral_test.go:24: got 'IIII', want 'IV'
 ```
 
@@ -291,8 +291,8 @@ func ConvertToRoman(arabic int) string {
 ## 테스트 실행 시도
 
 ```console
-=== RUN   TestRomanNumerals/5*gets*converted*to*V
-    --- FAIL: TestRomanNumerals/5*gets*converted*to*V (0.00s)
+=== RUN   TestRomanNumerals/5_gets_converted_to_V
+    --- FAIL: TestRomanNumerals/5_gets_converted_to_V (0.00s)
         numeral_test.go:25: got 'IIV', want 'V'
 ```
 
@@ -366,8 +366,8 @@ func ConvertToRoman(arabic int) string {
 ## 테스트 실행 시도
 
 ```console
-=== RUN   TestRomanNumerals/9*gets*converted*to*IX
-    --- FAIL: TestRomanNumerals/9*gets*converted*to*IX (0.00s)
+=== RUN   TestRomanNumerals/9_gets_converted_to_IX
+    --- FAIL: TestRomanNumerals/9_gets_converted_to_IX (0.00s)
         numeral_test.go:29: got 'VIV', want 'IX'
 ```
 
@@ -580,7 +580,7 @@ func ConvertToArabic(roman string) int {
 
 ```console
 --- FAIL: TestConvertingToArabic (0.00s)
-    --- FAIL: TestConvertingToArabic/'I'*gets*converted*to*1 (0.00s)
+    --- FAIL: TestConvertingToArabic/'I'_gets_converted_to_1 (0.00s)
         numeral_test.go:62: got 0, want 1
 ```
 

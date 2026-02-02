@@ -2,7 +2,7 @@
 
 **[여기에서 모든 코드를 찾을 수 있습니다](https://github.com/quii/learn-go-with-tests/tree/main/q-and-a/os-exec)**
 
-[keith6014](https://www.reddit.com/user/keith6014)가 [reddit](https://www.reddit.com/r/golang/comments/aaz8ji/testdata*and*function*setup*help/)에서 질문합니다
+[keith6014](https://www.reddit.com/user/keith6014)가 [reddit](https://www.reddit.com/r/golang/comments/aaz8ji/testdata_and_function_setup_help/)에서 질문합니다
 
 > os/exec.Command()를 사용하여 XML 데이터를 생성하는 명령을 실행하고 있습니다. 명령은 GetData()라는 함수에서 실행됩니다.
 
@@ -42,7 +42,7 @@ func GetData() string {
 
 - 프로세스에 외부 명령을 실행할 수 있는 `exec.Command`를 사용합니다
 - `cmd.StdoutPipe`에서 출력을 캡처하고 이것은 `io.ReadCloser`를 반환합니다 (이것이 중요해질 것입니다)
-- 나머지 코드는 [훌륭한 문서](https://golang.org/pkg/os/exec/#example*Cmd*StdoutPipe)에서 대부분 복사하여 붙여넣었습니다.
+- 나머지 코드는 [훌륭한 문서](https://golang.org/pkg/os/exec/#example_Cmd_StdoutPipe)에서 대부분 복사하여 붙여넣었습니다.
     - stdout의 모든 출력을 `io.ReadCloser`로 캡처한 다음 명령을 `Start`하고 `Wait`을 호출하여 모든 데이터를 읽을 때까지 기다립니다. 두 호출 사이에서 데이터를 `Payload` 구조체로 디코딩합니다.
 
 `msg.xml` 안에 포함된 내용입니다

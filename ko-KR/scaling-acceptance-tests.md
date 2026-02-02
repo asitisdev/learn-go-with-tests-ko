@@ -115,7 +115,7 @@ GopherconUK에서 Riya와 저는 이것을 Go 용어로 설명했습니다.
 
 강연에서 Riya와 저는 인수 테스트와 BDD와의 관계에 대해 논의했습니다. 해결하려는 *문제를 이해*하고 명세로 표현하여 작업을 시작하면 의도에 집중하는 데 도움이 되고 작업을 시작하는 좋은 방법이라고 이야기했습니다.
 
-저는 GOOS에서 처음으로 이 작업 방식을 소개받았습니다. 블로그에서 아이디어를 요약했습니다. [Why TDD](https://quii.dev/The*Why*of_TDD)에서 발췌:
+저는 GOOS에서 처음으로 이 작업 방식을 소개받았습니다. 블로그에서 아이디어를 요약했습니다. [Why TDD](https://quii.dev/The_Why_of_TDD)에서 발췌:
 
 ---
 
@@ -197,7 +197,7 @@ HTTP를 통해 "greeter 서비스"를 제공해야 합니다. 따라서 다음�
 
 `mkdir -p cmd/httpserver`
 
-새 폴더 안에 새 파일 `greeter*server*test.go`를 만들고 다음을 추가하세요.
+새 폴더 안에 새 파일 `greeter_server_test.go`를 만들고 다음을 추가하세요.
 
 ```go
 package main_test
@@ -219,11 +219,11 @@ Go 테스트에서 명세를 실행하려고 합니다. 이미 `*testing.T`에 �
 
 ```go
 import (
-	go*specs*greet "github.com/quii/go-specs-greet"
+	go_specs_greet "github.com/quii/go-specs-greet"
 )
 
 func TestGreeterServer(t *testing.T) {
-	driver := go*specs*greet.Driver{BaseURL: "http://localhost:8080"}
+	driver := go_specs_greet.Driver{BaseURL: "http://localhost:8080"}
 	specifications.GreetSpecification(t, driver)
 }
 ```
@@ -233,7 +233,7 @@ func TestGreeterServer(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-./greeter*server*test.go:46:12: undefined: go*specs*greet.Driver
+./greeter_server_test.go:46:12: undefined: go_specs_greet.Driver
 ```
 
 여기서도 여전히 TDD를 연습하고 있습니다! 첫 번째 단계가 큽니다; 몇 개의 `go` 파일을 만들고 일반적으로 익숙한 것보다 더 많은 코드를 작성해야 하지만, 처음 시작할 때 종종 그렇습니다. 빨간 단계의 규칙을 기억하려고 노력하는 것이 매우 중요합니다.
@@ -245,7 +245,7 @@ func TestGreeterServer(t *testing.T) {
 코를 막으세요; 테스트가 통과하면 리팩토링할 수 있다는 것을 기억하세요. 프로젝트 루트에 배치할 `driver.go`의 드라이버 코드입니다:
 
 ```go
-package go*specs*greet
+package go_specs_greet
 
 import (
 	"io"
@@ -291,7 +291,7 @@ Get "http://localhost:8080/greet": dial tcp [::1]:8080: connect: connection refu
 
 `go get github.com/testcontainers/testcontainers-go`
 
-이제 `cmd/httpserver/greeter*server*test.go`를 다음과 같이 편집할 수 있습니다:
+이제 `cmd/httpserver/greeter_server_test.go`를 다음과 같이 편집할 수 있습니다:
 
 ```go
 package main_test
@@ -301,7 +301,7 @@ import (
 	"testing"
 
 	"github.com/alecthomas/assert/v2"
-	go*specs*greet "github.com/quii/go-specs-greet"
+	go_specs_greet "github.com/quii/go-specs-greet"
 	"github.com/quii/go-specs-greet/specifications"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
@@ -329,7 +329,7 @@ func TestGreeterServer(t *testing.T) {
 		assert.NoError(t, container.Terminate(ctx))
 	})
 
-	driver := go*specs*greet.Driver{BaseURL: "http://localhost:8080"}
+	driver := go_specs_greet.Driver{BaseURL: "http://localhost:8080"}
 	specifications.GreetSpecification(t, driver)
 }
 ```
@@ -341,7 +341,7 @@ func TestGreeterServer(t *testing.T) {
 2022/09/10 18:49:44 Starting container id: 03e8588a1be4 image: docker.io/testcontainers/ryuk:0.3.3
 2022/09/10 18:49:45 Waiting for container id 03e8588a1be4 image: docker.io/testcontainers/ryuk:0.3.3
 2022/09/10 18:49:45 Container is ready id: 03e8588a1be4 image: docker.io/testcontainers/ryuk:0.3.3
-    greeter*server*test.go:32: Did not expect an error but got:
+    greeter_server_test.go:32: Did not expect an error but got:
         Error response from daemon: Cannot locate specified Dockerfile: ./cmd/httpserver/Dockerfile: failed to create container
 --- FAIL: TestGreeterHandler (0.59s)
 ```
@@ -451,14 +451,14 @@ func (d Driver) Greet() (string, error) {
 }
 ```
 
-`cmd/httpserver/greeter*server*test.go`의 테스트에서 클라이언트를 전달하도록 드라이버 생성을 업데이트하세요.
+`cmd/httpserver/greeter_server_test.go`의 테스트에서 클라이언트를 전달하도록 드라이버 생성을 업데이트하세요.
 
 ```go
 client := http.Client{
 	Timeout: 1 * time.Second,
 }
 
-driver := go*specs*greet.Driver{BaseURL: "http://localhost:8080", Client: &client}
+driver := go_specs_greet.Driver{BaseURL: "http://localhost:8080", Client: &client}
 specifications.GreetSpecification(t, driver)
 ```
 
@@ -467,7 +467,7 @@ specifications.GreetSpecification(t, driver)
 프로젝트 루트에 `handler.go`라는 파일을 만들고 코드를 거기로 이동하세요.
 
 ```go
-package go*specs*greet
+package go_specs_greet
 
 import (
 	"fmt"
@@ -487,11 +487,11 @@ package main
 import (
 	"net/http"
 
-	go*specs*greet "github.com/quii/go-specs-greet"
+	go_specs_greet "github.com/quii/go-specs-greet"
 )
 
 func main() {
-	handler := http.HandlerFunc(go*specs*greet.Handler)
+	handler := http.HandlerFunc(go_specs_greet.Handler)
 	http.ListenAndServe(":8080", handler)
 }
 ```
@@ -533,8 +533,8 @@ func GreetSpecification(t testing.TB, greeter Greeter) {
 ## 테스트 실행 시도
 
 ```
-./greeter*server*test.go:48:39: cannot use driver (variable of type go*specs*greet.Driver) as type specifications.Greeter in argument to specifications.GreetSpecification:
-	go*specs*greet.Driver does not implement specifications.Greeter (wrong type for Greet method)
+./greeter_server_test.go:48:39: cannot use driver (variable of type go_specs_greet.Driver) as type specifications.Greeter in argument to specifications.GreetSpecification:
+	go_specs_greet.Driver does not implement specifications.Greeter (wrong type for Greet method)
 		have Greet() (string, error)
 		want Greet(name string) (string, error)
 ```
@@ -607,7 +607,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 새 파일 `./greet.go`를 만드세요:
 ```go
-package go*specs*greet
+package go_specs_greet
 
 import "fmt"
 
@@ -625,17 +625,17 @@ func Greet(name string) string {
 `./greet_test.go`를 다음과 같이 만들어 시도해 봅시다:
 
 ```go
-package go*specs*greet_test
+package go_specs_greet_test
 
 import (
 	"testing"
 
-	go*specs*greet "github.com/quii/go-specs-greet"
+	go_specs_greet "github.com/quii/go-specs-greet"
 	"github.com/quii/go-specs-greet/specifications"
 )
 
 func TestGreet(t *testing.T) {
-	specifications.GreetSpecification(t, go*specs*greet.Greet)
+	specifications.GreetSpecification(t, go_specs_greet.Greet)
 }
 
 ```
@@ -643,7 +643,7 @@ func TestGreet(t *testing.T) {
 좋겠지만 작동하지 않습니다
 
 ```
-./greet*test.go:11:39: cannot use go*specs_greet.Greet (value of type func(name string) string) as type specifications.Greeter in argument to specifications.GreetSpecification:
+./greet_test.go:11:39: cannot use go_specs_greet.Greet (value of type func(name string) string) as type specifications.Greeter in argument to specifications.GreetSpecification:
 	func(name string) string does not implement specifications.Greeter (missing Greet method)
 ```
 
@@ -651,7 +651,7 @@ func TestGreet(t *testing.T) {
 
 컴파일 오류가 답답합니다; `Greeter`라고 "알고 있는" 것이 있지만 컴파일러가 사용할 수 있는 올바른 **형태**가 아닙니다. 이것이 **어댑터** 패턴이 해결하는 것입니다.
 
-> [소프트웨어 엔지니어링](https://en.wikipedia.org/wiki/Software*engineering)에서 **어댑터 패턴**은 기존 [클래스](https://en.wikipedia.org/wiki/Class*(computer*science))의 [인터페이스](https://en.wikipedia.org/wiki/Interface*(computer*science))를 다른 인터페이스로 사용할 수 있게 해주는 [소프트웨어 디자인 패턴](https://en.wikipedia.org/wiki/Software*design_pattern)입니다.
+> [소프트웨어 엔지니어링](https://en.wikipedia.org/wiki/Software_engineering)에서 **어댑터 패턴**은 기존 [클래스](https://en.wikipedia.org/wiki/Class_(computer_science))의 [인터페이스](https://en.wikipedia.org/wiki/Interface_(computer_science))를 다른 인터페이스로 사용할 수 있게 해주는 [소프트웨어 디자인 패턴](https://en.wikipedia.org/wiki/Software_design_pattern)입니다.
 
 디자인 패턴의 경우 종종 그렇듯이 비교적 간단한 것에 대한 많은 멋진 단어입니다. 그래서 사람들이 눈을 굴리는 경향이 있습니다. 디자인 패턴의 가치는 특정 구현이 아니라 엔지니어들이 직면하는 일반적인 문제에 대한 특정 솔루션을 설명하는 언어입니다.
 
@@ -729,7 +729,7 @@ quii@Chriss-MacBook-Pro go-specs-greet % tree
 ├── cmd
 │   └── httpserver
 |       ├── Dockerfile
-│       ├── greeter*server*test.go
+│       ├── greeter_server_test.go
 │       └── main.go
 ├── domain
 │   └── interactions
@@ -826,7 +826,7 @@ func TestGreeterServer(t *testing.T) {
 - 명세를 재사용할 수 있어야 합니다;
 - 도메인 코드를 재사용할 수 있어야 합니다.
 
-새 프로그램과 해당 인수 테스트를 담을 `cmd` 안에 새 폴더 `grpcserver`를 만드세요. `cmd/grpc*server/greeter*server_test.go` 안에 HTTP 서버 테스트와 매우 유사한 인수 테스트를 추가하세요. 이것은 우연이 아니라 설계에 의한 것입니다.
+새 프로그램과 해당 인수 테스트를 담을 `cmd` 안에 새 폴더 `grpcserver`를 만드세요. `cmd/grpc_server/greeter_server_test.go` 안에 HTTP 서버 테스트와 매우 유사한 인수 테스트를 추가하세요. 이것은 우연이 아니라 설계에 의한 것입니다.
 
 ```go
 package main_test
@@ -860,7 +860,7 @@ func TestGreeterServer(t *testing.T) {
 ## 테스트 실행 시도
 
 ```
-./greeter*server*test.go:26:12: undefined: grpcserver
+./greeter_server_test.go:26:12: undefined: grpcserver
 ```
 
 아직 `Driver`를 만들지 않았으므로 컴파일되지 않습니다.
@@ -953,8 +953,8 @@ message GreetReply {
 `adapters/grpcserver` 안에서 다음을 실행하여 클라이언트 및 서버 코드를 생성하세요
 
 ```
-protoc --go*out=. --go*opt=paths=source_relative \
-    --go-grpc*out=. --go-grpc*opt=paths=source_relative \
+protoc --go_out=. --go_opt=paths=source_relative \
+    --go-grpc_out=. --go-grpc_opt=paths=source_relative \
     greet.proto
 ```
 
@@ -1119,11 +1119,11 @@ quii@Chriss-MacBook-Pro go-specs-greet % tree
 ├── cmd
 │   ├── grpcserver
 │   │   ├── Dockerfile
-│   │   ├── greeter*server*test.go
+│   │   ├── greeter_server_test.go
 │   │   └── main.go
 │   └── httpserver
 │       ├── Dockerfile
-│       ├── greeter*server*test.go
+│       ├── greeter_server_test.go
 │       └── main.go
 ├── domain
 │   └── interactions
@@ -1150,7 +1150,7 @@ FROM golang:1.18-alpine
 
 WORKDIR /app
 
-ARG bin*to*build
+ARG bin_to_build
 
 COPY go.mod ./
 
@@ -1158,7 +1158,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o svr cmd/${bin*to*build}/main.go
+RUN go build -o svr cmd/${bin_to_build}/main.go
 
 CMD [ "./svr" ]
 ```
@@ -1178,7 +1178,7 @@ func StartDockerServer(
 			Context:    "../../.",
 			Dockerfile: "Dockerfile",
 			BuildArgs: map[string]*string{
-				"bin*to*build": &binToBuild,
+				"bin_to_build": &binToBuild,
 			},
 			PrintBuildLog: true,
 		},
@@ -1303,7 +1303,7 @@ func TestGreeterServer(t *testing.T) {
 
 ```
 # github.com/quii/go-specs-greet/cmd/grpcserver_test [github.com/quii/go-specs-greet/cmd/grpcserver.test]
-./greeter*server*test.go:27:39: cannot use &driver (value of type *grpcserver.Driver) as type specifications.MeanGreeter in argument to specifications.CurseSpecification:
+./greeter_server_test.go:27:39: cannot use &driver (value of type *grpcserver.Driver) as type specifications.MeanGreeter in argument to specifications.CurseSpecification:
 	*grpcserver.Driver does not implement specifications.MeanGreeter (missing Curse method)
 ```
 
@@ -1341,8 +1341,8 @@ service Greeter {
 `adapters/grpcserver` 안에서 코드를 다시 생성하세요.
 
 ```
-protoc --go*out=. --go*opt=paths=source_relative \
-    --go-grpc*out=. --go-grpc*opt=paths=source_relative \
+protoc --go_out=. --go_opt=paths=source_relative \
+    --go-grpc_out=. --go-grpc_opt=paths=source_relative \
     greet.proto
 ```
 
@@ -1433,5 +1433,3 @@ Dave Farley는 훌륭한 팁을 제공합니다:
 - 강조하자면, [Growing Object-Oriented Software, Guided by Tests](http://www.growing-object-oriented-software.com)는 고전입니다. "런던 스타일", "하향식" 접근 방식을 소프트웨어 작성에 적용하는 것을 보여줍니다. Learn Go with Tests를 즐긴 사람은 GOOS를 읽어서 많은 가치를 얻어야 합니다.
 - [예제 코드 리포지토리](https://github.com/quii/go-specs-greet)에는 여기서 작성하지 않은 더 많은 코드와 아이디어가 있습니다. 예를 들어 멀티 스테이지 Docker 빌드 등을 확인하고 싶을 수 있습니다.
   - 특히 *재미로* **세 번째 프로그램**, `Greet`와 `Curse`를 위한 HTML 폼이 있는 웹사이트를 만들었습니다. `Driver`는 훌륭해 보이는 [https://github.com/go-rod/rod](https://github.com/go-rod/rod) 모듈을 활용하여 사용자처럼 브라우저로 웹사이트와 작업할 수 있게 합니다. git 히스토리를 보면 "작동하게 만들기" 위해 템플릿 도구를 사용하지 않고 시작한 것을 볼 수 있습니다. 그런 다음 인수 테스트를 통과하면 두려움 없이 자유롭게 그렇게 할 수 있었습니다.
-
-

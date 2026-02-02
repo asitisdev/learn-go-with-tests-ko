@@ -565,7 +565,7 @@ func main() {
 
 ## 하지만 모킹은 악하지 않나요?
 
-모킹이 악하다고 들었을 수 있습니다. 소프트웨어 개발의 모든 것과 마찬가지로 [DRY](https://en.wikipedia.org/wiki/Don%27t*repeat*yourself)처럼 악을 위해 사용될 수 있습니다.
+모킹이 악하다고 들었을 수 있습니다. 소프트웨어 개발의 모든 것과 마찬가지로 [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)처럼 악을 위해 사용될 수 있습니다.
 
 사람들은 보통 *테스트를 듣지 않고* *리팩토링 단계를 존중하지 않을* 때 나쁜 상태에 빠집니다.
 

@@ -136,7 +136,7 @@ func (b BadStatusError) Error() string {
 
 ```
 --- FAIL: TestDumbGetter (0.00s)
-    --- FAIL: TestDumbGetter/when*you*dont*get*a*200*you*get*a*status*error (0.00s)
+    --- FAIL: TestDumbGetter/when_you_dont_get_a_200_you_get_a_status_error (0.00s)
     	error-types_test.go:56: was not a BadStatusError, got *errors.errorString
 ```
 
