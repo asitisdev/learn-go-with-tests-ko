@@ -133,7 +133,7 @@ t.Run("tells store to cancel work if request is cancelled", func(t *testing.T) {
 
 ## 테스트를 통과시키기 위한 충분한 코드 작성
 
-TDD에서 규율을 유지하는 것을 기억하세요. 테스트를 통과시키기 위해 *최소한*의 코드를 작성하세요.
+TDD에서 규율을 유지하는 것을 기억하세요. 테스트를 통과시키기 위해 **최소한**의 코드를 작성하세요.
 
 ```go
 func Server(store Store) http.HandlerFunc {
@@ -144,7 +144,7 @@ func Server(store Store) http.HandlerFunc {
 }
 ```
 
-이것은 이 테스트를 통과시키지만 기분이 좋지 않죠! *모든 요청*에서 fetch 전에 `Cancel()`을 취소해서는 안 됩니다.
+이것은 이 테스트를 통과시키지만 기분이 좋지 않죠! **모든 요청**에서 fetch 전에 `Cancel()`을 취소해서는 안 됩니다.
 
 규율을 유지함으로써 테스트의 결함을 강조했습니다. 이것은 좋은 것입니다!
 
@@ -484,7 +484,7 @@ func Server(store Store) http.HandlerFunc {
 
 > 내 (존재하지 않는) 회사에서 ctx.Value를 사용하면 해고됩니다
 
-일부 엔지니어들은 *편리하게 느껴지므로* `context`를 통해 값을 전달하는 것을 옹호해 왔습니다.
+일부 엔지니어들은 **편리하게 느껴지므로** `context`를 통해 값을 전달하는 것을 옹호해 왔습니다.
 
 편의성은 종종 나쁜 코드의 원인입니다.
 

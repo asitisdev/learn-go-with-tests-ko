@@ -419,7 +419,7 @@ t.Run("get player score", func(t *testing.T) {
 
 ## 먼저 테스트 작성
 
-우리의 접근 방식은 쓰기에 대해 상당히 근시안적입니다. 파일에서 JSON의 한 "행"만 (쉽게) 업데이트할 수 없습니다. 모든 쓰기에서 데이터베이스의 *전체* 새 표현을 저장해야 합니다.
+우리의 접근 방식은 쓰기에 대해 상당히 근시안적입니다. 파일에서 JSON의 한 "행"만 (쉽게) 업데이트할 수 없습니다. 모든 쓰기에서 데이터베이스의 **전체** 새 표현을 저장해야 합니다.
 
 어떻게 쓸까요? 일반적으로 `Writer`를 사용하지만 이미 `ReadSeeker`가 있습니다. 잠재적으로 두 개의 종속성을 가질 수 있지만 표준 라이브러리에는 이미 파일과 함께 필요한 모든 일을 할 수 있게 해주는 `ReadWriteSeeker` 인터페이스가 있습니다.
 
@@ -593,7 +593,7 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 
 왜 `player.Wins++`가 아니라 `league[i].Wins++`를 하는지 궁금할 수 있습니다.
 
-슬라이스를 `range`하면 루프의 현재 인덱스(우리의 경우 `i`)와 해당 인덱스의 요소 *복사본*을 반환합니다. 복사본의 `Wins` 값을 변경해도 반복하는 `league` 슬라이스에는 영향을 주지 않습니다. 그래서 `league[i]`를 수행하여 실제 값에 대한 참조를 가져와서 대신 해당 값을 변경해야 합니다.
+슬라이스를 `range`하면 루프의 현재 인덱스(우리의 경우 `i`)와 해당 인덱스의 요소 **복사본**을 반환합니다. 복사본의 `Wins` 값을 변경해도 반복하는 `league` 슬라이스에는 영향을 주지 않습니다. 그래서 `league[i]`를 수행하여 실제 값에 대한 참조를 가져와서 대신 해당 값을 변경해야 합니다.
 
 테스트를 실행하면 이제 통과해야 합니다.
 
@@ -811,13 +811,13 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 
 ### 또 다른 문제
 
-파일을 다루는 방식에 더 순진한 부분이 있어 나중에 매우 불쾌한 버그를 만들 *수* 있습니다.
+파일을 다루는 방식에 더 순진한 부분이 있어 나중에 매우 불쾌한 버그를 만들 **수** 있습니다.
 
 `RecordWin`할 때 파일의 시작으로 `Seek`한 다음 새 데이터를 씁니다—하지만 새 데이터가 이전에 있던 것보다 작으면 어떻게 됩니까?
 
 현재 경우에는 불가능합니다. 점수를 편집하거나 삭제하지 않으므로 데이터는 커질 수만 있습니다. 그러나 코드를 이대로 두는 것은 무책임합니다; 삭제 시나리오가 나타날 수 있다는 것은 상상할 수 없는 일이 아닙니다.
 
-그런데 이것을 어떻게 테스트할까요? 해야 할 일은 먼저 *쓰는 데이터의 종류를 쓰기에서* 분리하도록 코드를 리팩토링하는 것입니다. 그런 다음 그것을 별도로 테스트하여 원하는 대로 작동하는지 확인할 수 있습니다.
+그런데 이것을 어떻게 테스트할까요? 해야 할 일은 먼저 **쓰는 데이터의 종류를 쓰기에서** 분리하도록 코드를 리팩토링하는 것입니다. 그런 다음 그것을 별도로 테스트하여 원하는 대로 작동하는지 확인할 수 있습니다.
 
 "시작에서 쓰면" 기능을 캡슐화하는 새 타입을 만들겠습니다. `Tape`라고 부르겠습니다. 다음을 포함하는 새 파일을 만듭니다:
 
@@ -971,9 +971,9 @@ func (f *FileSystemPlayerStore) RecordWin(name string) {
 
 ### private 타입 테스트에 대해
 
-*일반적으로* private 것을 테스트하지 않는 것을 선호하는 것이 사실입니다. 그러면 테스트가 구현에 너무 긴밀하게 결합되어 나중에 리팩토링을 방해할 수 있습니다.
+**일반적으로** private 것을 테스트하지 않는 것을 선호하는 것이 사실입니다. 그러면 테스트가 구현에 너무 긴밀하게 결합되어 나중에 리팩토링을 방해할 수 있습니다.
 
-그러나 테스트가 *자신감*을 줘야 한다는 것을 잊지 않아야 합니다.
+그러나 테스트가 **자신감**을 줘야 한다는 것을 잊지 않아야 합니다.
 
 편집 또는 삭제 기능을 추가하면 구현이 작동할 것이라고 자신하지 못했습니다. 특히 초기 접근 방식의 단점을 인식하지 못할 수 있는 둘 이상의 사람이 작업하는 경우 코드를 그대로 두고 싶지 않았습니다.
 
@@ -992,7 +992,7 @@ type ReadWriteSeekTruncate interface {
 }
 ```
 
-하지만 이것이 정말로 무엇을 주나요? 우리는 *모킹하지 않고* **파일 시스템** 스토어가 `*os.File` 외에 다른 타입을 받는 것은 비현실적이므로 인터페이스가 주는 다형성이 필요하지 않습니다.
+하지만 이것이 정말로 무엇을 주나요? 우리는 **모킹하지 않고** **파일 시스템** 스토어가 `*os.File` 외에 다른 타입을 받는 것은 비현실적이므로 인터페이스가 주는 다형성이 필요하지 않습니다.
 
 여기서 한 것처럼 타입을 자르고 바꾸고 실험하는 것을 두려워하지 마세요. 정적으로 타입이 지정된 언어를 사용하는 좋은 점은 컴파일러가 모든 변경에 도움을 줄 것입니다.
 
@@ -1010,7 +1010,7 @@ type ReadWriteSeekTruncate interface {
 
 ```go
 //file_system_store.go
-func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
+func NewFileSystemPlayerStore(file **os.File) (**FileSystemPlayerStore, error) {
 	file.Seek(0, io.SeekStart)
 	league, err := NewLeague(file)
 
@@ -1121,7 +1121,7 @@ t.Run("works with an empty file", func(t *testing.T) {
 
 ```go
 //file_system_store.go
-func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
+func NewFileSystemPlayerStore(file **os.File) (**FileSystemPlayerStore, error) {
 
 	file.Seek(0, io.SeekStart)
 
@@ -1177,7 +1177,7 @@ func initialisePlayerDBFile(file *os.File) error {
 
 ```go
 //file_system_store.go
-func NewFileSystemPlayerStore(file *os.File) (*FileSystemPlayerStore, error) {
+func NewFileSystemPlayerStore(file **os.File) (**FileSystemPlayerStore, error) {
 
 	err := initialisePlayerDBFile(file)
 

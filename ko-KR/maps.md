@@ -53,7 +53,7 @@ func Search(dictionary map[string]string, word string) string {
 }
 ```
 
-테스트가 이제 *명확한 오류 메시지*와 함께 실패해야 합니다
+테스트가 이제 **명확한 오류 메시지**와 함께 실패해야 합니다
 
 `dictionary_test.go:12: got '' want 'this is just a test' given, 'test'`.
 
@@ -282,7 +282,7 @@ func (d Dictionary) Add(word, definition string) {
 
 맵의 흥미로운 속성은 주소를 전달하지 않고도 수정할 수 있다는 것입니다 (예: `&myMap`)
 
-이것은 "참조 타입"처럼 *느껴*지게 할 수 있지만, [Dave Cheney가 설명하듯이](https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it) 그렇지 않습니다.
+이것은 "참조 타입"처럼 **느껴**지게 할 수 있지만, [Dave Cheney가 설명하듯이](https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it) 그렇지 않습니다.
 
 > 맵 값은 runtime.hmap 구조체에 대한 포인터입니다.
 

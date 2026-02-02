@@ -90,11 +90,11 @@ GopherconUK에서 Riya와 저는 이것을 Go 용어로 설명했습니다.
 #### 드라이버를 구성 가능하게 만들기
 
 이것은 로컬, 스테이징 및 (이상적으로) 프로덕션 환경에서 AT를 실행할 수 있음을 의미합니다.
-- 너무 많은 팀이 인수 테스트를 로컬에서 실행할 수 없도록 시스템을 엔지니어링합니다. 이것은 참을 수 없을 정도로 느린 피드백 루프를 도입합니다. 코드를 통합하기 *전에* AT가 통과할 것이라고 확신하고 싶지 않습니까?
+- 너무 많은 팀이 인수 테스트를 로컬에서 실행할 수 없도록 시스템을 엔지니어링합니다. 이것은 참을 수 없을 정도로 느린 피드백 루프를 도입합니다. 코드를 통합하기 **전에** AT가 통과할 것이라고 확신하고 싶지 않습니까?
 - 스테이징에서 테스트가 통과한다고 해서 시스템이 작동한다는 의미는 아닙니다. Dev/Prod 동등성은 기껏해야 선의의 거짓말입니다. [저는 프로덕션에서 테스트합니다](https://increment.com/testing/i-test-in-production/).
-- 시스템의 *동작*에 영향을 줄 수 있는 환경 간의 차이가 항상 있습니다.
+- 시스템의 **동작**에 영향을 줄 수 있는 환경 간의 차이가 항상 있습니다.
 
-#### 시스템의 다른 부분을 테스트하기 위해 *다른* 드라이버 연결
+#### 시스템의 다른 부분을 테스트하기 위해 **다른** 드라이버 연결
 
 이 유연성으로 다른 추상화 및 아키텍처 계층에서 동작을 테스트할 수 있어 블랙박스 테스트를 넘어 더 집중된 테스트를 할 수 있습니다.
 - 예를 들어 뒤에 API가 있는 웹 페이지가 있을 수 있습니다. 왜 같은 명세를 사용하여 둘 다 테스트하지 않습니까?
@@ -113,7 +113,7 @@ GopherconUK에서 Riya와 저는 이것을 Go 용어로 설명했습니다.
 
 ### 소프트웨어 개발 방법으로서의 인수 테스트
 
-강연에서 Riya와 저는 인수 테스트와 BDD와의 관계에 대해 논의했습니다. 해결하려는 *문제를 이해*하고 명세로 표현하여 작업을 시작하면 의도에 집중하는 데 도움이 되고 작업을 시작하는 좋은 방법이라고 이야기했습니다.
+강연에서 Riya와 저는 인수 테스트와 BDD와의 관계에 대해 논의했습니다. 해결하려는 **문제를 이해**하고 명세로 표현하여 작업을 시작하면 의도에 집중하는 데 도움이 되고 작업을 시작하는 좋은 방법이라고 이야기했습니다.
 
 저는 GOOS에서 처음으로 이 작업 방식을 소개받았습니다. 블로그에서 아이디어를 요약했습니다. [Why TDD](https://quii.dev/The_Why_of_TDD)에서 발췌:
 
@@ -171,7 +171,7 @@ IDE(Goland)가 종속성 추가의 번거로움을 처리해 주지만 수동으
 
 `go get github.com/alecthomas/assert/v2`
 
-Farley의 인수 테스트 설계(Specification->DSL->Driver->System)를 고려하면 이제 구현에서 분리된 명세가 있습니다. `Greet`를 *어떻게* 하는지 알지도 관심도 없습니다; 도메인의 본질적 복잡성에만 관심이 있습니다. 당연히 이 복잡성은 현재 많지 않지만 더 반복하면서 기능을 추가하기 위해 명세를 확장할 것입니다. 작게 시작하는 것이 항상 중요합니다!
+Farley의 인수 테스트 설계(Specification->DSL->Driver->System)를 고려하면 이제 구현에서 분리된 명세가 있습니다. `Greet`를 **어떻게** 하는지 알지도 관심도 없습니다; 도메인의 본질적 복잡성에만 관심이 있습니다. 당연히 이 복잡성은 현재 많지 않지만 더 반복하면서 기능을 추가하기 위해 명세를 확장할 것입니다. 작게 시작하는 것이 항상 중요합니다!
 
 인터페이스를 DSL의 첫 번째 단계로 볼 수 있습니다; 프로젝트가 성장하면 다르게 추상화할 필요가 있을 수 있지만 현재는 괜찮습니다.
 
@@ -688,7 +688,7 @@ func TestGreet(t *testing.T) {
 - 명세에 따라 시스템이 동작하도록 구현 업데이트
 - 리팩토링
 
-첫 번째 반복의 고통 후에 명세, 드라이버 및 구현의 분리가 있기 때문에 인수 테스트 코드를 편집할 필요가 없었습니다. 명세를 변경하려면 드라이버를 업데이트하고 마지막으로 구현을 업데이트해야 했지만, 시스템을 컨테이너로 스핀업하는 *방법*에 대한 보일러플레이트 코드는 영향을 받지 않았습니다.
+첫 번째 반복의 고통 후에 명세, 드라이버 및 구현의 분리가 있기 때문에 인수 테스트 코드를 편집할 필요가 없었습니다. 명세를 변경하려면 드라이버를 업데이트하고 마지막으로 구현을 업데이트해야 했지만, 시스템을 컨테이너로 스핀업하는 **방법**에 대한 보일러플레이트 코드는 영향을 받지 않았습니다.
 
 **전체** 애플리케이션을 테스트하기 위해 Docker 이미지를 빌드하고 컨테이너를 스핀업하는 오버헤드가 있더라도 피드백 루프는 매우 빡빡합니다:
 
@@ -699,7 +699,7 @@ ok  	github.com/quii/go-specs-greet/cmd/httpserver	2.221s
 ?   	github.com/quii/go-specs-greet/specifications	[no test files]
 ```
 
-이제 CTO가 gRPC가 *미래*라고 결정했다고 상상해 보세요. 기존 HTTP 서버를 유지하면서 gRPC 서버를 통해 동일한 기능을 노출하기를 원합니다.
+이제 CTO가 gRPC가 **미래**라고 결정했다고 상상해 보세요. 기존 HTTP 서버를 유지하면서 gRPC 서버를 통해 동일한 기능을 노출하기를 원합니다.
 
 이것은 **우발적 복잡성**의 예입니다. 기억하세요, 우발적 복잡성은 네트워크, 디스크, API 등 컴퓨터로 작업하기 때문에 처리해야 하는 복잡성입니다. **본질적 복잡성은 변경되지 않았으므로** 명세를 변경할 필요가 없습니다.
 
@@ -707,7 +707,7 @@ ok  	github.com/quii/go-specs-greet/cmd/httpserver	2.221s
 
 ### 변경을 쉽게 만들기
 
-때때로 변경하기 *전에* 리팩토링을 하는 것이 합리적입니다.
+때때로 변경하기 **전에** 리팩토링을 하는 것이 합리적입니다.
 
 > 먼저 변경을 쉽게 만들고, 그런 다음 쉬운 변경을 하세요
 
@@ -748,7 +748,7 @@ quii@Chriss-MacBook-Pro go-specs-greet % tree
 마지막으로, 인수 테스트를 약간 정리할 수 있습니다. 인수 테스트의 상위 수준 단계를 고려하면:
 
 - Docker 이미지 빌드
-- *어떤* 포트에서 수신 대기할 때까지 대기
+- **어떤** 포트에서 수신 대기할 때까지 대기
 - DSL을 시스템별 호출로 변환하는 방법을 이해하는 드라이버 만들기
 - 드라이버를 명세에 연결
 
@@ -816,7 +816,7 @@ func TestGreeterServer(t *testing.T) {
 }
 ```
 
-이것은 *다음* 테스트 작성을 더 간단하게 만들어야 합니다.
+이것은 **다음** 테스트 작성을 더 간단하게 만들어야 합니다.
 
 ## 먼저 테스트 작성
 
@@ -881,7 +881,7 @@ func (d Driver) Greet(name string) (string, error) {
 }
 ```
 
-다시 실행하면 이제 *컴파일*되지만 Dockerfile과 해당 프로그램을 만들지 않았기 때문에 통과하지 않습니다.
+다시 실행하면 이제 **컴파일**되지만 Dockerfile과 해당 프로그램을 만들지 않았기 때문에 통과하지 않습니다.
 
 `cmd/grpcserver` 안에 새 `Dockerfile`을 만드세요.
 
@@ -1024,7 +1024,7 @@ type GreetServer struct {
 	grpcserver.UnimplementedGreeterServer
 }
 
-func (g GreetServer) Greet(ctx context.Context, request *grpcserver.GreetRequest) (*grpcserver.GreetReply, error) {
+func (g GreetServer) Greet(ctx context.Context, request **grpcserver.GreetRequest) (**grpcserver.GreetReply, error) {
 	return &grpcserver.GreetReply{Message: "fixme"}, nil
 }
 ```
@@ -1032,7 +1032,7 @@ func (g GreetServer) Greet(ctx context.Context, request *grpcserver.GreetRequest
 테스트가 이제 통과해야 합니다! 분명히 `"fixme"`는 메시지에 보내고 싶은 것이 아니므로 도메인 코드를 호출합시다
 
 ```go
-func (g GreetServer) Greet(ctx context.Context, request *grpcserver.GreetRequest) (*grpcserver.GreetReply, error) {
+func (g GreetServer) Greet(ctx context.Context, request **grpcserver.GreetRequest) (**grpcserver.GreetReply, error) {
 	return &grpcserver.GreetReply{Message: interactions.Greet(request.Name)}, nil
 }
 ```
@@ -1373,7 +1373,7 @@ func (d *Driver) Curse(name string) (string, error) {
 마지막으로 `Server`에 `Curse` 메서드를 추가해야 합니다
 
 ```go
-func (g GreetServer) Curse(ctx context.Context, request *GreetRequest) (*GreetReply, error) {
+func (g GreetServer) Curse(ctx context.Context, request **GreetRequest) (**GreetReply, error) {
 	return &GreetReply{Message: fmt.Sprintf("Go to hell, %s!", request.Name)}, nil
 }
 ```
@@ -1432,4 +1432,4 @@ Dave Farley는 훌륭한 팁을 제공합니다:
 - 이 예제에서 "DSL"은 별거 아닙니다; 명세를 실제 세계에서 분리하고 도메인 로직을 깔끔하게 표현할 수 있도록 인터페이스를 사용했습니다. 시스템이 성장하면 이 추상화 수준이 투박하고 불명확해질 수 있습니다. 명세를 구조화하는 방법에 대한 더 많은 아이디어를 원하면 ["Screenplay Pattern"에 대해 읽어보세요](https://cucumber.io/blog/bdd/understanding-screenplay-(part-1)/).
 - 강조하자면, [Growing Object-Oriented Software, Guided by Tests](http://www.growing-object-oriented-software.com)는 고전입니다. "런던 스타일", "하향식" 접근 방식을 소프트웨어 작성에 적용하는 것을 보여줍니다. Learn Go with Tests를 즐긴 사람은 GOOS를 읽어서 많은 가치를 얻어야 합니다.
 - [예제 코드 리포지토리](https://github.com/quii/go-specs-greet)에는 여기서 작성하지 않은 더 많은 코드와 아이디어가 있습니다. 예를 들어 멀티 스테이지 Docker 빌드 등을 확인하고 싶을 수 있습니다.
-  - 특히 *재미로* **세 번째 프로그램**, `Greet`와 `Curse`를 위한 HTML 폼이 있는 웹사이트를 만들었습니다. `Driver`는 훌륭해 보이는 [https://github.com/go-rod/rod](https://github.com/go-rod/rod) 모듈을 활용하여 사용자처럼 브라우저로 웹사이트와 작업할 수 있게 합니다. git 히스토리를 보면 "작동하게 만들기" 위해 템플릿 도구를 사용하지 않고 시작한 것을 볼 수 있습니다. 그런 다음 인수 테스트를 통과하면 두려움 없이 자유롭게 그렇게 할 수 있었습니다.
+  - 특히 **재미로** **세 번째 프로그램**, `Greet`와 `Curse`를 위한 HTML 폼이 있는 웹사이트를 만들었습니다. `Driver`는 훌륭해 보이는 [https://github.com/go-rod/rod](https://github.com/go-rod/rod) 모듈을 활용하여 사용자처럼 브라우저로 웹사이트와 작업할 수 있게 합니다. git 히스토리를 보면 "작동하게 만들기" 위해 템플릿 도구를 사용하지 않고 시작한 것을 볼 수 있습니다. 그런 다음 인수 테스트를 통과하면 두려움 없이 자유롭게 그렇게 할 수 있었습니다.
